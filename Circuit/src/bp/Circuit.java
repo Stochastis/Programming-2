@@ -60,12 +60,14 @@ public class Circuit implements ICircuit {
 
 	@Override
 	public void calculateAmperage() {
+		amperage = voltage / resistance;
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void calculateResistance() {
+		resistance = voltage / amperage;
 		// TODO Auto-generated method stub
 
 	}

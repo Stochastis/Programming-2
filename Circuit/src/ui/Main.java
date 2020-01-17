@@ -21,7 +21,7 @@ public class Main {
 
 		System.out.println("purpose statement");
 		System.out
-				.println("Would you like to calculate \n" + "1) Voltage, \n" + "2) Amperage or \n" + "3) Resistance3?");
+				.println("Would you like to calculate \n" + "1) Voltage, \n" + "2) Amperage or \n" + "3) Resistance?");
 		userChoice = keyboard.nextInt();
 		if (userChoice == 1) {
 			System.out.println("Please enter amperage");
@@ -37,6 +37,6 @@ public class Main {
 
 		keyboard.close();
 
-	}\\Comment
+	}
 
 }
