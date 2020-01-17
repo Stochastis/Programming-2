@@ -53,6 +53,7 @@ public class Circuit implements ICircuit {
 
 	@Override
 	public void calculateVoltage() {
+		voltage = amperage * resistance;
 		// TODO Auto-generated method stub
 
 	}
