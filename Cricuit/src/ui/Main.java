@@ -16,7 +16,7 @@ public class Main {
 	/**
 	 * @param args These arguments will not be used for this program.
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		Scanner keyboard = new Scanner(System.in);
 		Circuit myCircuit = new Circuit();
 		String userInput;
