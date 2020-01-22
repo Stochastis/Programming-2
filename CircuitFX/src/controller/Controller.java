@@ -11,7 +11,7 @@ public class Controller {
 	void handleClick(ActionEvent event) {
 		Alert myAlert = new Alert(AlertType.INFORMATION);
 		myAlert.setTitle("Hello");
-		myAlert.setContentText("You have your first fx response.");
+		myAlert.setContentText("I have the high ground.");
 		myAlert.showAndWait();
 	}
 

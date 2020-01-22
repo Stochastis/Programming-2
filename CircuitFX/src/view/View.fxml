@@ -11,8 +11,8 @@
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="controller.Controller">
 	<children>
-		<Button layoutX="266.0" layoutY="185.0" mnemonicParsing="false"
-			onAction="#handleClick" prefHeight="31.0" prefWidth="69.0"
-			text="Calculate" />
+		<Button layoutX="238.0" layoutY="185.0" mnemonicParsing="false"
+			onAction="#handleClick" prefHeight="31.0" prefWidth="124.0"
+			text="F**k you, Anakin," />
 	</children>
 </AnchorPane>
