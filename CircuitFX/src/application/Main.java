@@ -6,9 +6,14 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+/**
+ * 
+ * @author 214475
+ *
+ */
 public class Main extends Application {
 	@Override
-	public void start(Stage primaryStage) {
+	public final void start(final Stage primaryStage) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/view/View.fxml"));
 			Scene scene = new Scene(root);
@@ -21,7 +26,11 @@ public class Main extends Application {
 		}
 	}
 
-	public static void main(String[] args) {
+	/**
+	 * 
+	 * @param args These arguments will not be used.
+	 */
+	public static void main(final String[] args) {
 		launch(args);
 	}
 }
