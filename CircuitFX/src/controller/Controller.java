@@ -32,13 +32,14 @@ public class Controller {
 	@FXML
 	private TextField voltageTextField;
 
+	Circuit myCircuit = new Circuit();
+
 	@FXML
 	final void handleClick(final ActionEvent event) {
 
-		Circuit myCircuit = new Circuit();
-
 		if ((amperageTextField.getText().isBlank())
 				&& (!(resistanceTextField.getText().isBlank()) && (!(voltageTextField.getText().isBlank())))) {
+
 			myCircuit.setResistance(Double.parseDouble(resistanceTextField.getText()));
 			myCircuit.setVoltage(Double.parseDouble(voltageTextField.getText()));
 			myCircuit.calculateAmperage();
@@ -78,6 +79,9 @@ public class Controller {
 
 	@FXML
 	void handleClear(ActionEvent event) {
-
+		amperageTextField.clear();
+		resistanceTextField.clear();
+		voltageTextField.clear();
+		amperageTextField.requestFocus();
 	}
 }
