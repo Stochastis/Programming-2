@@ -44,7 +44,7 @@ public class Controller {
 				&& (!(resistanceTextField.getText().isBlank()) && (!(voltageTextField.getText().isBlank())))) {
 			boolean error = true;
 
-			while (!error) {
+			while (error) {
 				try {
 					myCircuit.setResistance(Double.parseDouble(resistanceTextField.getText()));
 					myCircuit.setVoltage(Double.parseDouble(voltageTextField.getText()));
@@ -69,12 +69,11 @@ public class Controller {
 					break;
 				}
 			}
-
 		} else if ((resistanceTextField.getText().isBlank())
 				&& (!(amperageTextField.getText().isBlank()) && (!(voltageTextField.getText().isBlank())))) {
 			boolean error = true;
 
-			while (!error) {
+			while (error) {
 				try {
 					myCircuit.setAmperage(Double.parseDouble(amperageTextField.getText()));
 					myCircuit.setVoltage(Double.parseDouble(voltageTextField.getText()));
@@ -103,7 +102,7 @@ public class Controller {
 				&& (!(amperageTextField.getText().isBlank()) && (!(resistanceTextField.getText().isBlank())))) {
 			boolean error = true;
 
-			while (!error) {
+			while (error) {
 				try {
 					myCircuit.setResistance(Double.parseDouble(resistanceTextField.getText()));
 					myCircuit.setAmperage(Double.parseDouble(amperageTextField.getText()));
