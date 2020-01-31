@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -7,27 +11,39 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
 	minHeight="-Infinity" minWidth="-Infinity" prefHeight="264.0"
-	prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
-	xmlns:fx="http://javafx.com/fxml/1"
+	prefWidth="600.0" style="-fx-background-color: black;"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="controller.Controller">
 	<children>
 		<Button defaultButton="true" layoutX="238.0" layoutY="185.0"
 			mnemonicParsing="false" onAction="#handleClick" prefHeight="31.0"
-			prefWidth="124.0" text="Calculate" />
-		<Label layoutX="112.0" layoutY="151.0" text="Voltage" />
-		<Label layoutX="104.0" layoutY="82.0" text="Amperage" />
-		<Label layoutX="104.0" layoutY="116.0" text="Resistance" />
+			prefWidth="124.0" text="Calculate">
+			<effect>
+				<ColorAdjust brightness="-0.3" contrast="0.95"
+					hue="-0.44" saturation="0.3" />
+			</effect>
+		</Button>
+		<Label layoutX="112.0" layoutY="151.0" text="Voltage"
+			textFill="WHITE" />
+		<Label layoutX="104.0" layoutY="82.0" text="Amperage"
+			textFill="WHITE" />
+		<Label layoutX="104.0" layoutY="116.0" text="Resistance"
+			textFill="WHITE" />
 		<TextField fx:id="amperageTextField" layoutX="223.0"
-			layoutY="78.0" />
+			layoutY="78.0" style="-fx-background-color: silver;" />
 		<TextField fx:id="resistanceTextField" layoutX="223.0"
-			layoutY="112.0" />
+			layoutY="112.0" style="-fx-background-color: silver;" />
 		<TextField fx:id="voltageTextField" layoutX="223.0"
-			layoutY="147.0" />
+			layoutY="147.0" style="-fx-background-color: silver;" />
 		<Label layoutX="113.0" layoutY="14.0" prefHeight="49.0"
 			prefWidth="374.0"
 			text="Please enter two of the three values and the missing one will be calculated."
-			textAlignment="CENTER" wrapText="true" />
+			textAlignment="CENTER" textFill="WHITE" wrapText="true" />
 		<Button cancelButton="true" layoutX="52.0" layoutY="216.0"
 			mnemonicParsing="false" onAction="#handleClear" text="Clear" />
 	</children>
+	<effect>
+		<ColorAdjust brightness="-0.4" contrast="-0.35" hue="0.35"
+			saturation="-0.05" />
+	</effect>
 </AnchorPane>
