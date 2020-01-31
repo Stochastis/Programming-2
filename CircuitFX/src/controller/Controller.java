@@ -42,6 +42,43 @@ public class Controller {
 
 		if ((amperageTextField.getText().isBlank())
 				&& (!(resistanceTextField.getText().isBlank()) && (!(voltageTextField.getText().isBlank())))) {
+
+			if ((resistanceTextField.getText().contentEquals("Pina"))
+					&& (voltageTextField.getText().equals("Colada"))) {
+				Alert myAlert = new Alert(AlertType.INFORMATION);
+				myAlert.setTitle("Song");
+				myAlert.setContentText("I was tired of my lady, we'd been together too long");
+				myAlert.showAndWait();
+				myAlert = new Alert(AlertType.INFORMATION);
+				myAlert.setTitle("Song");
+				myAlert.setContentText("Like a worn-out recording, of a favorite song");
+				myAlert.showAndWait();
+				myAlert = new Alert(AlertType.INFORMATION);
+				myAlert.setTitle("Song");
+				myAlert.setContentText("So while she lay there sleeping, I read the paper in bed");
+				myAlert.showAndWait();
+				myAlert = new Alert(AlertType.INFORMATION);
+				myAlert.setTitle("Song");
+				myAlert.setContentText("And in the personals column, there was this letter I read");
+				myAlert.showAndWait();
+				myAlert = new Alert(AlertType.INFORMATION);
+				myAlert.setTitle("Song");
+				myAlert.setContentText("If you like Pina Coladas, and getting caught in the rain");
+				myAlert.showAndWait();
+				myAlert = new Alert(AlertType.INFORMATION);
+				myAlert.setTitle("Song");
+				myAlert.setContentText("If you're not into yoga, if you have half a brain");
+				myAlert.showAndWait();
+				myAlert = new Alert(AlertType.INFORMATION);
+				myAlert.setTitle("Song");
+				myAlert.setContentText("If you like making love at midnight, in the dunes of the cape");
+				myAlert.showAndWait();
+				myAlert = new Alert(AlertType.INFORMATION);
+				myAlert.setTitle("Song");
+				myAlert.setContentText("I'm the love that you've looked for, write to me, and escape");
+				myAlert.showAndWait();
+			}
+
 			boolean error = true;
 
 			while (error) {
