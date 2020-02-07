@@ -8,71 +8,63 @@ package model;
  *
  */
 public class Circuit implements ICircuit {
+	private int toyID, circuitID;
+	private double voltage, amperage, resistance;
+	private String manufactureLocation;
 
 	@Override
 	public int getToyID() {
-		// TODO Auto-generated method stub
-		return 0;
+		return toyID;
 	}
 
 	@Override
 	public int getCircuitID() {
-		// TODO Auto-generated method stub
-		return 0;
+		return circuitID;
 	}
 
 	@Override
 	public double getVoltage() {
-		// TODO Auto-generated method stub
-		return 0;
+		return voltage;
 	}
 
 	@Override
 	public double getAmperage() {
-		// TODO Auto-generated method stub
-		return 0;
+		return amperage;
 	}
 
 	@Override
 	public double getResistance() {
-		// TODO Auto-generated method stub
-		return 0;
+		return resistance;
 	}
 
 	@Override
 	public String getManufactureLocation() {
-		// TODO Auto-generated method stub
-		return null;
+		return manufactureLocation;
 	}
 
 	@Override
 	public void setToyID(int pToyID) {
-		// TODO Auto-generated method stub
-
+		toyID = pToyID;
 	}
 
 	@Override
 	public void setCircuitID(int pCircuitID) {
-		// TODO Auto-generated method stub
-
+		circuitID = pCircuitID;
 	}
 
 	@Override
 	public void setVoltage(double pVoltage) {
-		// TODO Auto-generated method stub
-
+		voltage = pVoltage;
 	}
 
 	@Override
 	public void setResistance(double pResistance) {
-		// TODO Auto-generated method stub
-
+		resistance = pResistance;
 	}
 
 	@Override
 	public void setManufactureLocation(String pManufactureLocation) {
-		// TODO Auto-generated method stub
-
+		manufactureLocation = pManufactureLocation;
 	}
 
 }
