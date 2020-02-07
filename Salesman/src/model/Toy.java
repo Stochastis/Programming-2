@@ -9,60 +9,93 @@ import java.time.LocalDateTime;
  * @author 214475
  *
  */
-public class Toy implements IToy {
+public class Toy implements IToy, IPermanentStorage {
+	/**
+	 * This is the unique identification number.
+	 */
 	private int toyID;
+	/**
+	 * 
+	 */
 	private String inspector;
+	/**
+	 * This will store the date and time of when the inspector entered data.
+	 */
 	private LocalDateTime inspectionDateTime;
-	private Circuit circuit1, circuit2;
+	/**
+	 * 
+	 */
+	private Circuit circuit1 = new Circuit(1);
+	/**
+	 * 
+	 */
+	private Circuit circuit2 = new Circuit(2);
 
 	@Override
-	public int getToyID() {
+	public final int getToyID() {
 		return toyID;
 	}
 
 	@Override
-	public String getInspector() {
+	public final String getInspector() {
 		return inspector;
 	}
 
 	@Override
-	public LocalDateTime getInspectionDateTime() {
+	public final LocalDateTime getInspectionDateTime() {
 		return inspectionDateTime;
 	}
 
 	@Override
-	public Circuit getCircuit1() {
+	public final Circuit getCircuit1() {
 		return circuit1;
 	}
 
 	@Override
-	public Circuit getCircuit2() {
+	public final Circuit getCircuit2() {
 		return circuit2;
 	}
 
 	@Override
-	public void setToyID(int pToyID) {
+	public final void setToyID(final int pToyID) {
 		toyID = pToyID;
+		circuit1.setToyID(pToyID);
+		circuit2.setToyID(pToyID);
 	}
 
 	@Override
-	public void setInspector(String pInspector) {
+	public final void setInspector(final String pInspector) {
 		inspector = pInspector;
 	}
 
 	@Override
-	public void setInspectionDateTime(LocalDateTime pInspectionDateTime) {
+	public final void setInspectionDateTime(final LocalDateTime pInspectionDateTime) {
 		inspectionDateTime = pInspectionDateTime;
 	}
 
 	@Override
-	public void setCircuit1(Circuit pCircuit1) {
+	public final void setCircuit1(final Circuit pCircuit1) {
 		circuit1 = pCircuit1;
 	}
 
 	@Override
-	public void setCircuit2(Circuit pCircuit2) {
+	public final void setCircuit2(final Circuit pCircuit2) {
 		circuit2 = pCircuit2;
+	}
+
+	@Override
+	public final void save() {
+		throw new UnsupportedOperationException("Not implemented yet.");
+	}
+
+	@Override
+	public final void delete() {
+		throw new UnsupportedOperationException("Not implemented yet.");
+	}
+
+	@Override
+	public final void load(final int... id) {
+		throw new UnsupportedOperationException("Not implemented yet.");
 	}
 
 }
