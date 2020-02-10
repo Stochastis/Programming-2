@@ -6,13 +6,13 @@ package controller;
 
 import java.time.LocalDateTime;
 
-import org.w3c.dom.events.EventException;
-
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.util.Duration;
 import model.Toy;
 
 /**
@@ -21,60 +21,90 @@ import model.Toy;
  *
  */
 public class Controller {
-	@FXML // fx:id="txtInspector"
-	private TextField txtInspector; // Value injected by FXMLLoader
+	@FXML // fx:id="txtVoltage2"
+	private TextField txtVoltage2; // Value injected by FXMLLoader
 
 	@FXML // fx:id="txtToyID"
 	private TextField txtToyID; // Value injected by FXMLLoader
 
-	@FXML // fx:id="txtVoltage2"
-	private TextField txtVoltage2; // Value injected by FXMLLoader
+	@FXML // fx:id="txtVoltage1"
+	private TextField txtVoltage1; // Value injected by FXMLLoader
+
+	@FXML // fx:id="txtLocation1"
+	private ComboBox<String> txtLocation1; // Value injected by FXMLLoader
+
+	@FXML // fx:id="txtResistance1"
+	private TextField txtResistance1; // Value injected by FXMLLoader
+
+	@FXML // fx:id="txtInspector"
+	private TextField txtInspector; // Value injected by FXMLLoader
 
 	@FXML // fx:id="txtResistance2"
 	private TextField txtResistance2; // Value injected by FXMLLoader
 
 	@FXML // fx:id="txtLocation2"
-	private TextField txtLocation2; // Value injected by FXMLLoader
+	private ComboBox<String> txtLocation2; // Value injected by FXMLLoader
 
-	@FXML // fx:id="txtVoltage1"
-	private TextField txtVoltage1; // Value injected by FXMLLoader
+	@FXML // fx:id="errorMessage"
+	private Label errorMessage; // Value injected by FXMLLoader
 
-	@FXML // fx:id="txtResistance1"
-	private TextField txtResistance1; // Value injected by FXMLLoader
+	FadeTransition fade = new FadeTransition();
 
-	@FXML // fx:id="txtLocation1"
-	private TextField txtLocation1; // Value injected by FXMLLoader
+	private void playErrorMessage(String pErrorMessage) {
+		errorMessage.setText(pErrorMessage);
+		errorMessage.setOpacity(1);
+		fade.play();
+	}
+	// TODO: Implement this method.
+
+	@FXML
+	private void initialize() {
+		txtLocation1.getItems().add("China");
+		txtLocation1.getItems().add("Germany");
+		txtLocation1.getItems().add("United States");
+		txtLocation2.getItems().add("China");
+		txtLocation2.getItems().add("Germany");
+		txtLocation2.getItems().add("United States");
+		fade.setDuration(Duration.millis(5000));
+		fade.setFromValue(10);
+		fade.setToValue(0);
+		fade.setCycleCount(1000);
+		fade.setNode(errorMessage);
+		fade.setCycleCount(1);
+	}
 
 	@FXML
 	final void handleSave(final ActionEvent event) {
-		boolean error = true;
 		Toy myToy = new Toy();
 
 		// Set toy-only properties.
-		while (error) {
-			try {
-				myToy.setToyID(Integer.parseInt(txtToyID.getText()));
-				error = false;
-			} catch (Exception e) {
-				Alert myAlert = new Alert(AlertType.INFORMATION);
-				myAlert.setTitle("Error");
-				myAlert.setContentText("Please make sure that you entered a valid toy ID.");
-				myAlert.showAndWait();
-				break;
-			}
+		try {
+			myToy.setToyID(Integer.parseInt(txtToyID.getText()));
+		} catch (Exception e) {
+			playErrorMessage("Please enter a valid toy ID.");
 		}
-		myToy.setInspector(txtInspector.getText());
+
+		try {
+			if (!txtInspector.getText().isBlank()) {
+				myToy.setInspector(txtInspector.getText());
+			} else {
+				playErrorMessage("Please enter a valid Inspector.");
+			}
+		} catch (Exception e) {
+			playErrorMessage("Please enter a valid Inspector.");
+		}
+
 		myToy.setInspectionDateTime(LocalDateTime.now());
 
 		// set circuit1 properties.
 		myToy.getCircuit1().setVoltage(Integer.parseInt(txtVoltage1.getText()));
 		myToy.getCircuit1().setResistance(Integer.parseInt(txtResistance1.getText()));
-		myToy.getCircuit1().setManufactureLocation(txtLocation1.getText());
+		myToy.getCircuit1().setManufactureLocation((String) txtLocation1.getValue());
 
 		// set circuit2 properties.
 		myToy.getCircuit2().setVoltage(Integer.parseInt(txtVoltage2.getText()));
 		myToy.getCircuit2().setResistance(Integer.parseInt(txtResistance2.getText()));
-		myToy.getCircuit2().setManufactureLocation(txtLocation2.getText());
+		myToy.getCircuit2().setManufactureLocation((String) txtLocation2.getValue());
 
 		// TODO: myToy.save();
 
