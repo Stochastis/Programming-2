@@ -3,6 +3,7 @@ module salesman {
 	requires javafx.controls;
 	requires javafx.fxml;
 	requires javafx.base;
+	requires java.xml;
 
 	exports application to javafx.graphics;
 
