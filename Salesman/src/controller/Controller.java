@@ -21,36 +21,67 @@ import model.Toy;
  *
  */
 public class Controller {
+	/**
+	 * Text field for circuit 2's voltage.
+	 */
 	@FXML // fx:id="txtVoltage2"
 	private TextField txtVoltage2; // Value injected by FXMLLoader
 
+	/**
+	 * Text field for the toy id.
+	 */
 	@FXML // fx:id="txtToyID"
 	private TextField txtToyID; // Value injected by FXMLLoader
 
+	/**
+	 * Text field for circuit 1's voltage.
+	 */
 	@FXML // fx:id="txtVoltage1"
 	private TextField txtVoltage1; // Value injected by FXMLLoader
 
+	/**
+	 * Combo box for circuit 1's location.
+	 */
 	@FXML // fx:id="txtLocation1"
 	private ComboBox<String> txtLocation1; // Value injected by FXMLLoader
 
+	/**
+	 * Text field for circuit 1's resistance.
+	 */
 	@FXML // fx:id="txtResistance1"
 	private TextField txtResistance1; // Value injected by FXMLLoader
 
+	/**
+	 * Text field for inspector's name.
+	 */
 	@FXML // fx:id="txtInspector"
 	private TextField txtInspector; // Value injected by FXMLLoader
 
+	/**
+	 * Text field for circuit 2's resistance.
+	 */
 	@FXML // fx:id="txtResistance2"
 	private TextField txtResistance2; // Value injected by FXMLLoader
 
+	/**
+	 * Combo box for circuit 2's location.
+	 */
 	@FXML // fx:id="txtLocation2"
 	private ComboBox<String> txtLocation2; // Value injected by FXMLLoader
 
+	/**
+	 * An editable text field that will display a fading error message when a value
+	 * isn't entered properly.
+	 */
 	@FXML // fx:id="errorMessage"
 	private Label errorMessage; // Value injected by FXMLLoader
 
-	FadeTransition fade = new FadeTransition();
+	/**
+	 * This is a fading animation that can be called whenever it is needed.
+	 */
+	private FadeTransition fade = new FadeTransition();
 
-	private void playErrorMessage(String pErrorMessage) {
+	private void playErrorMessage(final String pErrorMessage) {
 		errorMessage.setText(pErrorMessage);
 		fade.stop();
 		errorMessage.setOpacity(1);

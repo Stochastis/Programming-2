@@ -12,10 +12,17 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+	prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="controller.Controller">
 	<children>
-		<Button defaultButton="true" layoutX="280.0" layoutY="252.0" mnemonicParsing="false" onAction="#handleSave" text="Save" />
-		<Label layoutX="100.0" prefHeight="83.0" prefWidth="390.0" text="This form allows data entry on the Talking Salesman toy for quality control purposes. (All information is property of Kembell Berkstresser Enterprises. Only authorized employees may use this form.)" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+		<Button defaultButton="true" layoutX="280.0" layoutY="252.0"
+			mnemonicParsing="false" onAction="#handleSave" text="Save" />
+		<Label layoutX="100.0" prefHeight="83.0" prefWidth="390.0"
+			text="This form allows data entry on the Talking Salesman toy for quality control purposes. (All information is property of Kembell Berkstresser Enterprises. Only authorized employees may use this form.)"
+			textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
 			<font>
 				<Font size="11.0" />
 			</font>
@@ -25,15 +32,21 @@
 				<Font size="13.0" />
 			</font>
 		</Label>
-		<TextField fx:id="txtInspector" layoutX="315.0" layoutY="80.0" promptText="Inspector Name Here" />
+		<TextField fx:id="txtInspector" layoutX="315.0"
+			layoutY="80.0" promptText="Inspector Name Here" />
 		<Label layoutX="234.0" layoutY="105.0" text="Toy ID:">
 			<font>
 				<Font size="13.0" />
 			</font>
 		</Label>
-		<TextField fx:id="txtToyID" layoutX="315.0" layoutY="102.0" promptText="Toy ID Here" />
-		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="226.0" layoutX="14.0" layoutY="164.0" stroke="BLACK" strokeType="INSIDE" width="247.0" />
-		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="226.0" layoutX="341.0" layoutY="164.0" stroke="BLACK" strokeType="INSIDE" width="247.0" />
+		<TextField fx:id="txtToyID" layoutX="315.0" layoutY="102.0"
+			promptText="Toy ID Here" />
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00"
+			height="226.0" layoutX="14.0" layoutY="164.0" stroke="BLACK"
+			strokeType="INSIDE" width="247.0" />
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00"
+			height="226.0" layoutX="341.0" layoutY="164.0" stroke="BLACK"
+			strokeType="INSIDE" width="247.0" />
 		<Label layoutX="43.0" layoutY="164.0" text="Circuit 1:">
 			<font>
 				<Font size="13.0" />
@@ -44,43 +57,63 @@
 				<Font size="13.0" />
 			</font>
 		</Label>
-		<Label alignment="CENTER_RIGHT" layoutX="40.0" layoutY="243.0" prefHeight="19.0" prefWidth="82.0" text="Voltage:">
+		<Label alignment="CENTER_RIGHT" layoutX="40.0" layoutY="243.0"
+			prefHeight="19.0" prefWidth="82.0" text="Voltage:">
 			<font>
 				<Font size="13.0" />
 			</font>
 		</Label>
-		<Label alignment="CENTER_RIGHT" layoutX="358.0" layoutY="243.0" prefHeight="19.0" prefWidth="82.0" text="Voltage:">
+		<Label alignment="CENTER_RIGHT" layoutX="358.0" layoutY="243.0"
+			prefHeight="19.0" prefWidth="82.0" text="Voltage:">
 			<font>
 				<Font size="13.0" />
 			</font>
 		</Label>
-		<Label alignment="CENTER_RIGHT" layoutX="37.0" layoutY="277.0" prefHeight="19.0" prefWidth="82.0" text="Resistance:" textAlignment="RIGHT">
+		<Label alignment="CENTER_RIGHT" layoutX="37.0" layoutY="277.0"
+			prefHeight="19.0" prefWidth="82.0" text="Resistance:"
+			textAlignment="RIGHT">
 			<font>
 				<Font size="13.0" />
 			</font>
 		</Label>
-		<Label alignment="CENTER_RIGHT" layoutX="358.0" layoutY="277.0" prefHeight="19.0" prefWidth="82.0" text="Resistance:">
+		<Label alignment="CENTER_RIGHT" layoutX="358.0" layoutY="277.0"
+			prefHeight="19.0" prefWidth="82.0" text="Resistance:">
 			<font>
 				<Font size="13.0" />
 			</font>
 		</Label>
-		<Label alignment="CENTER_RIGHT" layoutX="40.0" layoutY="308.0" text="Mfg. Location:" textAlignment="RIGHT">
+		<Label alignment="CENTER_RIGHT" layoutX="40.0" layoutY="308.0"
+			text="Mfg. Location:" textAlignment="RIGHT">
 			<font>
 				<Font size="13.0" />
 			</font>
 		</Label>
-		<Label alignment="CENTER_RIGHT" layoutX="358.0" layoutY="308.0" text="Mfg. Location:">
+		<Label alignment="CENTER_RIGHT" layoutX="358.0" layoutY="308.0"
+			text="Mfg. Location:">
 			<font>
 				<Font size="13.0" />
 			</font>
 		</Label>
-		<TextField fx:id="txtVoltage1" layoutX="127.0" layoutY="240.0" prefHeight="25.0" prefWidth="127.0" promptText="Voltage" />
-		<TextField fx:id="txtResistance1" layoutX="127.0" layoutY="274.0" prefHeight="25.0" prefWidth="127.0" promptText="Resistance" />
-		<ComboBox fx:id="txtLocation1" layoutX="127.0" layoutY="305.0" prefHeight="25.0" prefWidth="127.0" promptText="Location" visibleRowCount="3" />
-		<TextField fx:id="txtVoltage2" layoutX="447.0" layoutY="240.0" prefHeight="25.0" prefWidth="127.0" promptText="Voltage" />
-		<TextField fx:id="txtResistance2" layoutX="447.0" layoutY="274.0" prefHeight="25.0" prefWidth="127.0" promptText="Resistance" />
-		<ComboBox fx:id="txtLocation2" layoutX="447.0" layoutY="305.0" prefHeight="25.0" prefWidth="127.0" promptText="Location" visibleRowCount="3" />
-		<Label fx:id="errorMessage" layoutX="18.0" layoutY="127.0" opacity="0.0" text="Placeholder Text" textFill="RED">
+		<TextField fx:id="txtVoltage1" layoutX="127.0"
+			layoutY="240.0" prefHeight="25.0" prefWidth="127.0"
+			promptText="Voltage" />
+		<TextField fx:id="txtResistance1" layoutX="127.0"
+			layoutY="274.0" prefHeight="25.0" prefWidth="127.0"
+			promptText="Resistance" />
+		<ComboBox fx:id="txtLocation1" layoutX="127.0"
+			layoutY="305.0" prefHeight="25.0" prefWidth="127.0"
+			promptText="Location" visibleRowCount="3" />
+		<TextField fx:id="txtVoltage2" layoutX="447.0"
+			layoutY="240.0" prefHeight="25.0" prefWidth="127.0"
+			promptText="Voltage" />
+		<TextField fx:id="txtResistance2" layoutX="447.0"
+			layoutY="274.0" prefHeight="25.0" prefWidth="127.0"
+			promptText="Resistance" />
+		<ComboBox fx:id="txtLocation2" layoutX="447.0"
+			layoutY="305.0" prefHeight="25.0" prefWidth="127.0"
+			promptText="Location" visibleRowCount="3" />
+		<Label fx:id="errorMessage" layoutX="18.0" layoutY="127.0"
+			opacity="0.0" text="Placeholder Text" textFill="RED">
 			<font>
 				<Font size="13.0" />
 			</font>
