@@ -52,10 +52,10 @@ public class Controller {
 
 	private void playErrorMessage(String pErrorMessage) {
 		errorMessage.setText(pErrorMessage);
+		fade.stop();
 		errorMessage.setOpacity(1);
 		fade.play();
 	}
-	// TODO: Implement this method.
 
 	@FXML
 	private void initialize() {
@@ -76,35 +76,80 @@ public class Controller {
 	@FXML
 	final void handleSave(final ActionEvent event) {
 		Toy myToy = new Toy();
+		boolean error = false;
 
 		// Set toy-only properties.
 		try {
 			myToy.setToyID(Integer.parseInt(txtToyID.getText()));
 		} catch (Exception e) {
 			playErrorMessage("Please enter a valid toy ID.");
+			error = true;
 		}
-
 		try {
 			if (!txtInspector.getText().isBlank()) {
 				myToy.setInspector(txtInspector.getText());
 			} else {
 				playErrorMessage("Please enter a valid Inspector.");
+				error = true;
 			}
 		} catch (Exception e) {
 			playErrorMessage("Please enter a valid Inspector.");
+			error = true;
 		}
-
 		myToy.setInspectionDateTime(LocalDateTime.now());
 
 		// set circuit1 properties.
-		myToy.getCircuit1().setVoltage(Integer.parseInt(txtVoltage1.getText()));
-		myToy.getCircuit1().setResistance(Integer.parseInt(txtResistance1.getText()));
-		myToy.getCircuit1().setManufactureLocation((String) txtLocation1.getValue());
+		try {
+			myToy.getCircuit1().setVoltage(Integer.parseInt(txtVoltage1.getText()));
+		} catch (Exception e) {
+			playErrorMessage("Please enter a valid voltage for circuit 1.");
+			error = true;
+		}
+		try {
+			myToy.getCircuit1().setResistance(Integer.parseInt(txtResistance1.getText()));
+		} catch (Exception e) {
+			playErrorMessage("Please enter a valid resistance for circuit 1.");
+			error = true;
+		}
+		if (txtLocation1.getValue() == null) {
+			playErrorMessage("Please select location for circuit 1.");
+			error = true;
+		} else {
+			myToy.getCircuit1().setManufactureLocation((String) txtLocation1.getValue());
+		}
 
 		// set circuit2 properties.
-		myToy.getCircuit2().setVoltage(Integer.parseInt(txtVoltage2.getText()));
-		myToy.getCircuit2().setResistance(Integer.parseInt(txtResistance2.getText()));
-		myToy.getCircuit2().setManufactureLocation((String) txtLocation2.getValue());
+		try {
+			myToy.getCircuit2().setVoltage(Integer.parseInt(txtVoltage2.getText()));
+		} catch (Exception e) {
+			playErrorMessage("Please enter a valid voltage for circuit 2.");
+			error = true;
+		}
+		try {
+			myToy.getCircuit2().setResistance(Integer.parseInt(txtResistance2.getText()));
+		} catch (Exception e) {
+			playErrorMessage("Please enter a valid resistance for circuit 2.");
+			error = true;
+		}
+		if (txtLocation2.getValue() == null) {
+			playErrorMessage("Please select location for circuit 2.");
+			error = true;
+		} else {
+			myToy.getCircuit1().setManufactureLocation((String) txtLocation2.getValue());
+		}
+
+		// Clear fields if there are no errors that need fixed
+		if (!error) {
+			txtToyID.clear();
+			txtVoltage1.clear();
+			txtResistance1.clear();
+			txtLocation1.getSelectionModel().clearSelection();
+			txtVoltage2.clear();
+			txtResistance2.clear();
+			txtLocation2.getSelectionModel().clearSelection();
+		} else {
+			error = false;
+		}
 
 		// TODO: myToy.save();
 
