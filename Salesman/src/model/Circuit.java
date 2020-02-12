@@ -3,6 +3,13 @@
  */
 package model;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import db.Database;
+import db.Parameter;
+
 /**
  * @author 214475
  *
@@ -88,8 +95,19 @@ public class Circuit implements ICircuit, IPermanentStorage {
 	}
 
 	@Override
-	public final void save() {
-		throw new UnsupportedOperationException("Not implemented yet.");
+	public final void save() throws SQLException {
+		Database db = new Database("db.cberkstresser.name");
+		List<Parameter<?>> params = new ArrayList<>();
+
+		// ToyID, CircuitID, ManufactureLocation, Voltage, Amperage, Resistance
+		params.add(new Parameter<Integer>(toyID));
+		params.add(new Parameter<Integer>(circuitID));
+		params.add(new Parameter<String>(manufactureLocation));
+		params.add(new Parameter<Double>(voltage));
+		params.add(new Parameter<Double>(getAmperage()));
+		params.add(new Parameter<Double>(resistance));
+
+		db.executeSql("usp_SaveCircuit", params);
 	}
 
 	@Override

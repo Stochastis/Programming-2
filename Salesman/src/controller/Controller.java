@@ -4,6 +4,7 @@
 
 package controller;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 import javafx.animation.FadeTransition;
@@ -105,7 +106,7 @@ public class Controller {
 	}
 
 	@FXML
-	final void handleSave(final ActionEvent event) {
+	final void handleSave(final ActionEvent event) throws SQLException {
 		Toy myToy = new Toy();
 		boolean error = false;
 
@@ -182,29 +183,29 @@ public class Controller {
 			error = false;
 		}
 
-		// TODO: myToy.save();
+		myToy.save();
 
-		StringBuilder results = new StringBuilder();
-		results.append("\n----------------------");
-		results.append("\nToy Information");
-		results.append("\nInspector Name: " + myToy.getInspector());
-		results.append("\nInspection Date/Time: " + myToy.getInspectionDateTime());
-		results.append("\nToyID: " + myToy.getToyID());
-		results.append("\n----------------------");
-		results.append("\nCircuit 1 Information");
-		results.append("\nCircuit ID: " + myToy.getCircuit1().getCircuitID());
-		results.append("\nVoltage: " + myToy.getCircuit1().getVoltage());
-		results.append("\nAmperage: " + myToy.getCircuit1().getAmperage());
-		results.append("\nResistance: " + myToy.getCircuit1().getResistance());
-		results.append("\nLocation: " + myToy.getCircuit1().getManufactureLocation());
-		results.append("\n----------------------");
-		results.append("\nCircuit 2 Information");
-		results.append("\nCircuit ID: " + myToy.getCircuit2().getCircuitID());
-		results.append("\nVoltage: " + myToy.getCircuit2().getVoltage());
-		results.append("\nAmperage: " + myToy.getCircuit2().getAmperage());
-		results.append("\nResistance: " + myToy.getCircuit2().getResistance());
-		results.append("\nLocation: " + myToy.getCircuit2().getManufactureLocation());
-		System.out.println(results);
+		/*
+		 * StringBuilder results = new StringBuilder();
+		 * results.append("\n----------------------");
+		 * results.append("\nToy Information"); results.append("\nInspector Name: " +
+		 * myToy.getInspector()); results.append("\nInspection Date/Time: " +
+		 * myToy.getInspectionDateTime()); results.append("\nToyID: " +
+		 * myToy.getToyID()); results.append("\n----------------------");
+		 * results.append("\nCircuit 1 Information"); results.append("\nCircuit ID: " +
+		 * myToy.getCircuit1().getCircuitID()); results.append("\nVoltage: " +
+		 * myToy.getCircuit1().getVoltage()); results.append("\nAmperage: " +
+		 * myToy.getCircuit1().getAmperage()); results.append("\nResistance: " +
+		 * myToy.getCircuit1().getResistance()); results.append("\nLocation: " +
+		 * myToy.getCircuit1().getManufactureLocation());
+		 * results.append("\n----------------------");
+		 * results.append("\nCircuit 2 Information"); results.append("\nCircuit ID: " +
+		 * myToy.getCircuit2().getCircuitID()); results.append("\nVoltage: " +
+		 * myToy.getCircuit2().getVoltage()); results.append("\nAmperage: " +
+		 * myToy.getCircuit2().getAmperage()); results.append("\nResistance: " +
+		 * myToy.getCircuit2().getResistance()); results.append("\nLocation: " +
+		 * myToy.getCircuit2().getManufactureLocation()); System.out.println(results);
+		 */
 	}
 
 }

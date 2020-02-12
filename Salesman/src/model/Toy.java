@@ -3,7 +3,13 @@
  */
 package model;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import db.Database;
+import db.Parameter;
 
 /**
  * @author 214475
@@ -84,8 +90,19 @@ public class Toy implements IToy, IPermanentStorage {
 	}
 
 	@Override
-	public final void save() {
-		throw new UnsupportedOperationException("Not implemented yet.");
+	public final void save() throws SQLException {
+		Database db = new Database("db.cberkstresser.name");
+		List<Parameter<?>> params = new ArrayList<>();
+
+		// ToyID, Inspector, InspectionDateTime
+		params.add(new Parameter<Integer>(toyID));
+		params.add(new Parameter<String>(inspector));
+		params.add(new Parameter<LocalDateTime>(inspectionDateTime));
+
+		db.executeSql("usp_SaveToy", params);
+
+		circuit1.save();
+		circuit2.save();
 	}
 
 	@Override
