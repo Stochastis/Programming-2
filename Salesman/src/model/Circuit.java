@@ -17,7 +17,7 @@ public class Circuit implements ICircuit, IPermanentStorage {
 	 * voltage, amperage, and resistance will store the values of individual
 	 * circuits.
 	 */
-	private double voltage, amperage, resistance;
+	private double voltage, resistance;
 	/**
 	 * manufactureLocation will store where the circuits were created.
 	 */
@@ -49,7 +49,7 @@ public class Circuit implements ICircuit, IPermanentStorage {
 
 	@Override
 	public final double getAmperage() {
-		return amperage;
+		return voltage / resistance;
 	}
 
 	@Override

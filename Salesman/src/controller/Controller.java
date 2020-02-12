@@ -135,7 +135,7 @@ public class Controller {
 			playErrorMessage("Please select location for circuit 2.");
 			error = true;
 		} else {
-			myToy.getCircuit1().setManufactureLocation((String) txtLocation2.getValue());
+			myToy.getCircuit2().setManufactureLocation((String) txtLocation2.getValue());
 		}
 
 		// Clear fields if there are no errors that need fixed
