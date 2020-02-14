@@ -6,6 +6,7 @@ package controller;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
@@ -13,6 +14,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.util.Duration;
 import model.Toy;
 
@@ -22,6 +27,11 @@ import model.Toy;
  *
  */
 public class Controller {
+	/**
+	 * This is a toy object for inputting data.
+	 */
+	Toy myToy = new Toy();
+
 	/**
 	 * Text field for circuit 2's voltage.
 	 */
@@ -71,6 +81,12 @@ public class Controller {
 	private ComboBox<String> txtLocation2; // Value injected by FXMLLoader
 
 	/**
+	 * This is the delete button.
+	 */
+	@FXML // fx:id="btnDelete"
+	private Button btnDelete; // Value injected by FXMLLoader
+
+	/**
 	 * An editable text field that will display a fading error message when a value
 	 * isn't entered properly.
 	 */
@@ -107,7 +123,6 @@ public class Controller {
 
 	@FXML
 	final void handleSave(final ActionEvent event) throws SQLException {
-		Toy myToy = new Toy();
 		boolean error = false;
 
 		// Set toy-only properties.
@@ -184,28 +199,56 @@ public class Controller {
 		}
 
 		myToy.save();
-
-		/*
-		 * StringBuilder results = new StringBuilder();
-		 * results.append("\n----------------------");
-		 * results.append("\nToy Information"); results.append("\nInspector Name: " +
-		 * myToy.getInspector()); results.append("\nInspection Date/Time: " +
-		 * myToy.getInspectionDateTime()); results.append("\nToyID: " +
-		 * myToy.getToyID()); results.append("\n----------------------");
-		 * results.append("\nCircuit 1 Information"); results.append("\nCircuit ID: " +
-		 * myToy.getCircuit1().getCircuitID()); results.append("\nVoltage: " +
-		 * myToy.getCircuit1().getVoltage()); results.append("\nAmperage: " +
-		 * myToy.getCircuit1().getAmperage()); results.append("\nResistance: " +
-		 * myToy.getCircuit1().getResistance()); results.append("\nLocation: " +
-		 * myToy.getCircuit1().getManufactureLocation());
-		 * results.append("\n----------------------");
-		 * results.append("\nCircuit 2 Information"); results.append("\nCircuit ID: " +
-		 * myToy.getCircuit2().getCircuitID()); results.append("\nVoltage: " +
-		 * myToy.getCircuit2().getVoltage()); results.append("\nAmperage: " +
-		 * myToy.getCircuit2().getAmperage()); results.append("\nResistance: " +
-		 * myToy.getCircuit2().getResistance()); results.append("\nLocation: " +
-		 * myToy.getCircuit2().getManufactureLocation()); System.out.println(results);
-		 */
+		btnDelete.setDisable(false);
 	}
 
+	@FXML
+	final void handleDelete(final ActionEvent event) throws SQLException {
+		try {
+			Alert myAlert = new Alert(AlertType.CONFIRMATION);
+			myAlert.setTitle("Confirm Delete");
+			myAlert.setHeaderText("Are you sure?");
+			myAlert.setContentText("Are you sure you want to delete toyID: " + myToy.getToyID());
+			Optional<ButtonType> answer = myAlert.showAndWait();
+			System.out.println("Right before the if statement.");
+			if (answer.isPresent() && answer.get().equals(ButtonType.OK)) {
+				System.out.println("Right after the if statement.");
+				myToy.delete();
+				System.out.println("Toy deleted.");
+				Alert deleted = new Alert(AlertType.INFORMATION);
+				deleted.setTitle("Deleted");
+				deleted.setContentText("ToyID " + myToy.getToyID() + " deleted.");
+				deleted.showAndWait();
+				handleClear(null);
+				btnDelete.setDisable(true);
+			} else {
+				Alert cancelled = new Alert(AlertType.INFORMATION);
+				cancelled.setTitle("Delete cancelled");
+				cancelled.setContentText("ToyID " + myToy.getToyID() + " not deleted.");
+				cancelled.showAndWait();
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		txtToyID.clear();
+		txtVoltage1.clear();
+		txtResistance1.clear();
+		txtLocation1.getSelectionModel().clearSelection();
+		txtVoltage2.clear();
+		txtResistance2.clear();
+		txtLocation2.getSelectionModel().clearSelection();
+
+	}
+
+	@FXML
+	final void handleClear(final ActionEvent event) {
+		txtToyID.clear();
+		txtVoltage1.clear();
+		txtResistance1.clear();
+		txtLocation1.getSelectionModel().clearSelection();
+		txtVoltage2.clear();
+		txtResistance2.clear();
+		txtLocation2.getSelectionModel().clearSelection();
+	}
 }

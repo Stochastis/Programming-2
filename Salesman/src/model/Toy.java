@@ -106,8 +106,15 @@ public class Toy implements IToy, IPermanentStorage {
 	}
 
 	@Override
-	public final void delete() {
-		throw new UnsupportedOperationException("Not implemented yet.");
+	public final void delete() throws SQLException {
+		Database db = new Database("db.cberkstresser.name");
+		List<Parameter<?>> params = new ArrayList<>();
+
+		params.add(new Parameter<Integer>(toyID));
+
+		db.executeSql("usp_DeleteToy", params);
+
+		// TODO: FIND A WAY TO MAKE THE VIEW SHOW DELETED
 	}
 
 	@Override
