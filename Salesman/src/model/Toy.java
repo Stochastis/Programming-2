@@ -3,6 +3,7 @@
  */
 package model;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -113,13 +114,23 @@ public class Toy implements IToy, IPermanentStorage {
 		params.add(new Parameter<Integer>(toyID));
 
 		db.executeSql("usp_DeleteToy", params);
-
-		// TODO: FIND A WAY TO MAKE THE VIEW SHOW DELETED
 	}
 
 	@Override
-	public final void load(final int... id) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+	public final void load(final int... id) throws SQLException {
+		Database db = new Database("db.cberkstresser.name");
+		List<Parameter<?>> params = new ArrayList<>();
+
+		params.add(new Parameter<Integer>(id[0]));
+
+		// db.executeSql("usp_LoadToy", params);
+
+		ResultSet rsToy = db.getResultSet("usp_LoadToy", params);
+		if (rsToy.next()) {
+			toyID = rsToy.getInt("ToyID");
+			circuit1.load(toyID, 1);
+			circuit2.load(toyID, 2);
+		}
 	}
 
 }

@@ -117,7 +117,8 @@ public class Circuit implements ICircuit, IPermanentStorage {
 
 	@Override
 	public final void load(final int... id) {
-		throw new UnsupportedOperationException("Not implemented yet.");
+		// throw new UnsupportedOperationException("Not implemented yet.");
+		// TODO: IMPLEMENT THIS METHOD
 	}
 
 }

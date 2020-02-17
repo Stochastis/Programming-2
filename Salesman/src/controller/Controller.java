@@ -210,9 +210,7 @@ public class Controller {
 			myAlert.setHeaderText("Are you sure?");
 			myAlert.setContentText("Are you sure you want to delete toyID: " + myToy.getToyID());
 			Optional<ButtonType> answer = myAlert.showAndWait();
-			System.out.println("Right before the if statement.");
 			if (answer.isPresent() && answer.get().equals(ButtonType.OK)) {
-				System.out.println("Right after the if statement.");
 				myToy.delete();
 				System.out.println("Toy deleted.");
 				Alert deleted = new Alert(AlertType.INFORMATION);
@@ -250,5 +248,18 @@ public class Controller {
 		txtVoltage2.clear();
 		txtResistance2.clear();
 		txtLocation2.getSelectionModel().clearSelection();
+	}
+
+	@FXML
+	final void handleLoad(final ActionEvent event) throws NumberFormatException, SQLException {
+		myToy.load(Integer.parseInt(txtToyID.getText()));
+		// Load view
+		txtInspector.setText(myToy.getInspector());
+		txtResistance1.setText(Double.toString(myToy.getCircuit1().getResistance()));
+		txtResistance2.setText(Double.toString(myToy.getCircuit2().getResistance()));
+		txtVoltage1.setText(Double.toString(myToy.getCircuit1().getVoltage()));
+		txtVoltage2.setText(Double.toString(myToy.getCircuit2().getVoltage()));
+		txtLocation1.getSelectionModel().select(myToy.getCircuit1().getManufactureLocation());
+		// TODO: SET LOCATION BOXES AND INSPECTION DATE/TIME
 	}
 }
