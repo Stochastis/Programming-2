@@ -199,6 +199,7 @@ public class Controller {
 		}
 
 		myToy.save();
+		playErrorMessage("Saved toy " + myToy.getToyID());
 		btnDelete.setDisable(false);
 	}
 
@@ -260,6 +261,7 @@ public class Controller {
 		txtVoltage1.setText(Double.toString(myToy.getCircuit1().getVoltage()));
 		txtVoltage2.setText(Double.toString(myToy.getCircuit2().getVoltage()));
 		txtLocation1.getSelectionModel().select(myToy.getCircuit1().getManufactureLocation());
+		txtLocation2.getSelectionModel().select(myToy.getCircuit2().getManufactureLocation());
 		// TODO: SET LOCATION BOXES AND INSPECTION DATE/TIME
 	}
 }
