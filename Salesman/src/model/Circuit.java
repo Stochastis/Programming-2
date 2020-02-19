@@ -3,6 +3,7 @@
  */
 package model;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -111,14 +112,30 @@ public class Circuit implements ICircuit, IPermanentStorage {
 	}
 
 	@Override
-	public final void delete() {
-		throw new UnsupportedOperationException("Not implemented yet.");
+	public final void delete() throws SQLException {
+		Database db = new Database("db.cberkstresser.name");
+		List<Parameter<?>> params = new ArrayList<>();
+
+		params.add(new Parameter<Integer>(toyID));
+
+		db.executeSql("usp_DeleteCircuit", params);
 	}
 
 	@Override
-	public final void load(final int... id) {
-		// throw new UnsupportedOperationException("Not implemented yet.");
-		// TODO: IMPLEMENT THIS METHOD
-	}
+	public final void load(final int... id) throws SQLException {
+		Database db = new Database("db.cberkstresser.name");
+		List<Parameter<?>> params = new ArrayList<>();
 
+		params.add(new Parameter<Integer>(id[0]));
+		params.add(new Parameter<Integer>(id[1]));
+
+		ResultSet rsCircuit = db.getResultSet("usp_LoadCircuit", params);
+		if (rsCircuit.next()) {
+			toyID = rsCircuit.getInt("ToyID");
+			circuitID = rsCircuit.getInt("CircuitID");
+			voltage = rsCircuit.getDouble("Voltage");
+			resistance = rsCircuit.getDouble("Resistance");
+			manufactureLocation = rsCircuit.getString("ManufactureLocation");
+		}
+	}
 }

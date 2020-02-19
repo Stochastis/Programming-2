@@ -132,5 +132,4 @@ public class Toy implements IToy, IPermanentStorage {
 			circuit2.load(toyID, 2);
 		}
 	}
-
 }

@@ -209,9 +209,10 @@ public class Controller {
 			Alert myAlert = new Alert(AlertType.CONFIRMATION);
 			myAlert.setTitle("Confirm Delete");
 			myAlert.setHeaderText("Are you sure?");
-			myAlert.setContentText("Are you sure you want to delete toyID: " + myToy.getToyID());
+			myAlert.setContentText("Are you sure you want to delete toyID: " + txtToyID.getText());
 			Optional<ButtonType> answer = myAlert.showAndWait();
 			if (answer.isPresent() && answer.get().equals(ButtonType.OK)) {
+				myToy.setToyID(Integer.parseInt(txtToyID.getText()));
 				myToy.delete();
 				System.out.println("Toy deleted.");
 				Alert deleted = new Alert(AlertType.INFORMATION);
@@ -223,7 +224,7 @@ public class Controller {
 			} else {
 				Alert cancelled = new Alert(AlertType.INFORMATION);
 				cancelled.setTitle("Delete cancelled");
-				cancelled.setContentText("ToyID " + myToy.getToyID() + " not deleted.");
+				cancelled.setContentText("ToyID " + txtToyID.getText() + " not deleted.");
 				cancelled.showAndWait();
 			}
 
