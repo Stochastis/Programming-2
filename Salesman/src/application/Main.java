@@ -8,8 +8,8 @@ import javafx.scene.Scene;
 
 /**
  * 
- * @author Caleb
- * This is the main application. This also instantiates the FXML loader and the scene.
+ * @author Caleb This is the main application. This also instantiates the FXML
+ *         loader and the scene.
  *
  */
 public class Main extends Application {

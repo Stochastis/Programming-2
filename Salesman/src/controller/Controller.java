@@ -1,7 +1,3 @@
-/**
- * Sample Skeleton for 'View.fxml' Controller Class
- */
-
 package controller;
 
 import java.sql.SQLException;
@@ -87,6 +83,12 @@ public class Controller {
 	private Button btnDelete; // Value injected by FXMLLoader
 
 	/**
+	 * This is the text field that will show the inspection date/time.
+	 */
+	@FXML // fx:id="txtTime"
+	private TextField txtTime; // Value injected by FXMLLoader
+
+	/**
 	 * An editable text field that will display a fading error message when a value
 	 * isn't entered properly.
 	 */
@@ -126,6 +128,7 @@ public class Controller {
 		boolean error = false;
 
 		// Set toy-only properties.
+		myToy.setInspectionDateTime(LocalDateTime.now());
 		try {
 			myToy.setToyID(Integer.parseInt(txtToyID.getText()));
 		} catch (Exception e) {
@@ -263,6 +266,6 @@ public class Controller {
 		txtVoltage2.setText(Double.toString(myToy.getCircuit2().getVoltage()));
 		txtLocation1.getSelectionModel().select(myToy.getCircuit1().getManufactureLocation());
 		txtLocation2.getSelectionModel().select(myToy.getCircuit2().getManufactureLocation());
-		// TODO: SET LOCATION BOXES AND INSPECTION DATE/TIME
+		txtTime.setText(myToy.getInspectionDateTime().toString());
 	}
 }
