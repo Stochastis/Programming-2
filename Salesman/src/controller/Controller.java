@@ -2,7 +2,9 @@ package controller;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
@@ -95,6 +97,24 @@ public class Controller {
 	@FXML // fx:id="errorMessage"
 	private Label errorMessage; // Value injected by FXMLLoader
 
+	@FXML
+	final void handleSetLanguageEnglish(final ActionEvent event) {
+		setFieldsWithTranslations("en", "US");
+	}
+
+	@FXML
+	final void handleSetLanguageSpanish(final ActionEvent event) {
+		setFieldsWithTranslations("es", "MX");
+	}
+
+	private void setFieldsWithTranslations(final String language, final String region) {
+		Locale myLocale = new Locale(language, region);
+
+		ResourceBundle rb = ResourceBundle.getBundle("Translation", myLocale);
+		btnDelete.setText(rb.getString("delete"));
+		// TODO: ADD THE OTHERS LATER
+	}
+
 	/**
 	 * This is a fading animation that can be called whenever it is needed.
 	 */
@@ -121,6 +141,7 @@ public class Controller {
 		fade.setCycleCount(1000);
 		fade.setNode(errorMessage);
 		fade.setCycleCount(1);
+		handleSetLanguageEnglish(null);
 	}
 
 	@FXML
