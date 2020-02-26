@@ -123,11 +123,13 @@ public class Toy implements IToy, IPermanentStorage {
 
 		params.add(new Parameter<Integer>(id[0]));
 
-		// db.executeSql("usp_LoadToy", params);
+		db.executeSql("usp_LoadToy", params);
 
 		ResultSet rsToy = db.getResultSet("usp_LoadToy", params);
 		if (rsToy.next()) {
 			toyID = rsToy.getInt("ToyID");
+			inspector = rsToy.getString("Inspector");
+			inspectionDateTime = (rsToy.getTimestamp("InspectionDateTime")).toLocalDateTime();
 			circuit1.load(toyID, 1);
 			circuit2.load(toyID, 2);
 		}

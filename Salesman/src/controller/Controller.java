@@ -278,15 +278,20 @@ public class Controller {
 
 	@FXML
 	final void handleLoad(final ActionEvent event) throws NumberFormatException, SQLException {
-		myToy.load(Integer.parseInt(txtToyID.getText()));
-		// Load view
-		txtInspector.setText(myToy.getInspector());
-		txtResistance1.setText(Double.toString(myToy.getCircuit1().getResistance()));
-		txtResistance2.setText(Double.toString(myToy.getCircuit2().getResistance()));
-		txtVoltage1.setText(Double.toString(myToy.getCircuit1().getVoltage()));
-		txtVoltage2.setText(Double.toString(myToy.getCircuit2().getVoltage()));
-		txtLocation1.getSelectionModel().select(myToy.getCircuit1().getManufactureLocation());
-		txtLocation2.getSelectionModel().select(myToy.getCircuit2().getManufactureLocation());
-		txtTime.setText(myToy.getInspectionDateTime().toString());
+		myToy = new Toy();
+		try {
+			myToy.load(Integer.parseInt(txtToyID.getText()));
+			// Load view
+			txtInspector.setText(myToy.getInspector());
+			txtResistance1.setText(Double.toString(myToy.getCircuit1().getResistance()));
+			txtResistance2.setText(Double.toString(myToy.getCircuit2().getResistance()));
+			txtVoltage1.setText(Double.toString(myToy.getCircuit1().getVoltage()));
+			txtVoltage2.setText(Double.toString(myToy.getCircuit2().getVoltage()));
+			txtLocation1.getSelectionModel().select(myToy.getCircuit1().getManufactureLocation());
+			txtLocation2.getSelectionModel().select(myToy.getCircuit2().getManufactureLocation());
+			txtTime.setText(myToy.getInspectionDateTime().toString());
+		} catch (Exception e) {
+			playErrorMessage("Toy " + txtToyID.getText() + " does not exist.");
+		}
 	}
 }
