@@ -151,7 +151,12 @@ public class Controller {
 		// Set toy-only properties.
 		myToy.setInspectionDateTime(LocalDateTime.now());
 		try {
-			myToy.setToyID(Integer.parseInt(txtToyID.getText()));
+			if (!txtToyID.getText().isBlank()) {
+				myToy.setToyID(Integer.parseInt(txtToyID.getText()));
+			} else {
+				playErrorMessage("Please enter a valid toy ID.");
+				error = true;
+			}
 		} catch (Exception e) {
 			playErrorMessage("Please enter a valid toy ID.");
 			error = true;
@@ -208,9 +213,14 @@ public class Controller {
 		} else {
 			myToy.getCircuit2().setManufactureLocation((String) txtLocation2.getValue());
 		}
+		if (!(myToy.getToyID() > 0)) {
+			playErrorMessage("Please enter a valid toy ID.");
+			error = true;
+		}
 
 		// Clear fields if there are no errors that need fixed
 		if (!error) {
+			myToy.save();
 			txtToyID.clear();
 			txtVoltage1.clear();
 			txtResistance1.clear();
@@ -218,13 +228,11 @@ public class Controller {
 			txtVoltage2.clear();
 			txtResistance2.clear();
 			txtLocation2.getSelectionModel().clearSelection();
+			playErrorMessage("Saved toy " + myToy.getToyID());
+			btnDelete.setDisable(false);
 		} else {
 			error = false;
 		}
-
-		myToy.save();
-		playErrorMessage("Saved toy " + myToy.getToyID());
-		btnDelete.setDisable(false);
 	}
 
 	@FXML
