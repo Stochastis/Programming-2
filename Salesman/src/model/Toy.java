@@ -90,7 +90,7 @@ public class Toy implements IToy, IPermanentStorage {
 		circuit2 = pCircuit2;
 	}
 
-	@Override
+	@Override //This will save the toy's information, as well as the individual circuit's information, to the database.	
 	public final void save() throws SQLException {
 		Database db = new Database("db.cberkstresser.name");
 		List<Parameter<?>> params = new ArrayList<>();
@@ -106,7 +106,7 @@ public class Toy implements IToy, IPermanentStorage {
 		circuit2.save();
 	}
 
-	@Override
+	@Override //This will delete the toy and its circuits from the database.
 	public final void delete() throws SQLException {
 		Database db = new Database("db.cberkstresser.name");
 		List<Parameter<?>> params = new ArrayList<>();
@@ -116,7 +116,7 @@ public class Toy implements IToy, IPermanentStorage {
 		db.executeSql("usp_DeleteToy", params);
 	}
 
-	@Override
+	@Override //This will load a toy and its unique circuits from the database.
 	public final void load(final int... id) throws SQLException {
 		Database db = new Database("db.cberkstresser.name");
 		List<Parameter<?>> params = new ArrayList<>();
