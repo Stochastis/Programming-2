@@ -112,7 +112,6 @@ public class Controller {
 
 		ResourceBundle rb = ResourceBundle.getBundle("Translation", myLocale);
 		btnDelete.setText(rb.getString("delete"));
-		// TODO: ADD THE OTHERS LATER
 	}
 
 	/**
@@ -218,7 +217,7 @@ public class Controller {
 			error = true;
 		}
 
-		// Clear fields if there are no errors that need fixed
+		// If there are no errors, save the toy and clear the text fields.
 		if (!error) {
 			myToy.save();
 			txtToyID.clear();
