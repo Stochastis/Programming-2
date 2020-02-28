@@ -95,7 +95,7 @@ public class Circuit implements ICircuit, IPermanentStorage {
 		manufactureLocation = pManufactureLocation;
 	}
 
-	@Override
+	@Override //This will save a toy to the database.
 	public final void save() throws SQLException {
 		Database db = new Database("db.cberkstresser.name");
 		List<Parameter<?>> params = new ArrayList<>();
@@ -111,7 +111,7 @@ public class Circuit implements ICircuit, IPermanentStorage {
 		db.executeSql("usp_SaveCircuit", params);
 	}
 
-	@Override
+	@Override //This will delete a toy from the database.
 	public final void delete() throws SQLException {
 		Database db = new Database("db.cberkstresser.name");
 		List<Parameter<?>> params = new ArrayList<>();
@@ -121,7 +121,7 @@ public class Circuit implements ICircuit, IPermanentStorage {
 		db.executeSql("usp_DeleteCircuit", params);
 	}
 
-	@Override
+	@Override //This will load a toy from the database.
 	public final void load(final int... id) throws SQLException {
 		Database db = new Database("db.cberkstresser.name");
 		List<Parameter<?>> params = new ArrayList<>();
