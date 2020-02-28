@@ -119,6 +119,7 @@ public class Controller {
 	 */
 	private FadeTransition fade = new FadeTransition();
 
+	//This method displays a fading error message. The text of the message can be passed into the method as a parameter.
 	private void playErrorMessage(final String pErrorMessage) {
 		errorMessage.setText(pErrorMessage);
 		fade.stop();
@@ -126,7 +127,7 @@ public class Controller {
 		fade.play();
 	}
 
-	@FXML
+	@FXML // This initialization adds the location items to the combo boxes and sets the properties of the fading error animation.
 	private void initialize() {
 		txtLocation1.getItems().add("China");
 		txtLocation1.getItems().add("Germany");
@@ -143,11 +144,11 @@ public class Controller {
 		handleSetLanguageEnglish(null);
 	}
 
-	@FXML
+	@FXML //This method will attempt to save a toy to the database.
 	final void handleSave(final ActionEvent event) throws SQLException {
 		boolean error = false;
 
-		// Set toy-only properties.
+		//Set toy-only properties.
 		myToy.setInspectionDateTime(LocalDateTime.now());
 		try {
 			if (!txtToyID.getText().isBlank()) {
@@ -173,7 +174,7 @@ public class Controller {
 		}
 		myToy.setInspectionDateTime(LocalDateTime.now());
 
-		// set circuit1 properties.
+		//Set circuit1 properties.
 		try {
 			myToy.getCircuit1().setVoltage(Integer.parseInt(txtVoltage1.getText()));
 		} catch (Exception e) {
@@ -193,7 +194,7 @@ public class Controller {
 			myToy.getCircuit1().setManufactureLocation((String) txtLocation1.getValue());
 		}
 
-		// set circuit2 properties.
+		//Set circuit2 properties.
 		try {
 			myToy.getCircuit2().setVoltage(Integer.parseInt(txtVoltage2.getText()));
 		} catch (Exception e) {
@@ -234,15 +235,17 @@ public class Controller {
 		}
 	}
 
-	@FXML
+	@FXML //This method will attempt to delete a toy.
 	final void handleDelete(final ActionEvent event) throws SQLException {
 		try {
+			//Ask the user if they are sure they want to delete the toy.
 			Alert myAlert = new Alert(AlertType.CONFIRMATION);
 			myAlert.setTitle("Confirm Delete");
 			myAlert.setHeaderText("Are you sure?");
 			myAlert.setContentText("Are you sure you want to delete toyID: " + txtToyID.getText());
 			Optional<ButtonType> answer = myAlert.showAndWait();
 			if (answer.isPresent() && answer.get().equals(ButtonType.OK)) {
+				//If they verify the user verifies that they want to delete the toy, delete it.
 				myToy.setToyID(Integer.parseInt(txtToyID.getText()));
 				myToy.delete();
 				System.out.println("Toy deleted.");
@@ -262,6 +265,7 @@ public class Controller {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		//This clears the text fields after deleting a toy.
 		txtToyID.clear();
 		txtVoltage1.clear();
 		txtResistance1.clear();
@@ -272,7 +276,7 @@ public class Controller {
 
 	}
 
-	@FXML
+	@FXML //This clears all of the input fields except for the inspector.
 	final void handleClear(final ActionEvent event) {
 		txtToyID.clear();
 		txtVoltage1.clear();
@@ -283,7 +287,7 @@ public class Controller {
 		txtLocation2.getSelectionModel().clearSelection();
 	}
 
-	@FXML
+	@FXML //This will attempt to load a toy from the database and display its information.
 	final void handleLoad(final ActionEvent event) throws NumberFormatException, SQLException {
 		myToy = new Toy();
 		try {
@@ -298,6 +302,7 @@ public class Controller {
 			txtLocation2.getSelectionModel().select(myToy.getCircuit2().getManufactureLocation());
 			txtTime.setText(myToy.getInspectionDateTime().toString());
 		} catch (Exception e) {
+			//If there is an error in loading the toy, tell the user it does not exist.
 			playErrorMessage("Toy " + txtToyID.getText() + " does not exist.");
 		}
 	}
