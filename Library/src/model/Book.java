@@ -109,7 +109,7 @@ public class Book {
 	 * @throws SQLException
 	 */
 	public void create() throws SQLException {
-		Database db = new Database();
+		Database db = new Database("db.cberkstresser.name", "library");
 		List<Parameter<?>> params = new ArrayList<>();
 
 		params.add(new Parameter<String>(author));
@@ -117,10 +117,7 @@ public class Book {
 		params.add(new Parameter<String>(genre));
 		params.add(new Parameter<String>(location));
 
-		ResultSet rsBook = db.getResultSet("usp_CreateBook", params);
-		if (rsBook.next()) {
-			rowID = rsBook.getInt(1);
-		}
+		db.executeSql("usp_CreateBook", params);
 	}
 
 	/**
