@@ -3,13 +3,17 @@ package controller;
 import model.Book;
 
 import java.sql.SQLException;
+
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Duration;
 
 /**
  * @author 214475
@@ -99,17 +103,45 @@ public class Controller {
 	@FXML
 	private TextField txtLocation;
 
+	/**
+	 * An editable text field that will display a fading error message when a value
+	 * isn't entered properly.
+	 */
+	@FXML // fx:id="errorMessage"
+	private Label errorMessage; // Value injected by FXMLLoader
+
+	/**
+	 * This is a fading animation that can be called whenever it is needed.
+	 */
+	private FadeTransition fade = new FadeTransition();
+
+	/*
+	 * This method displays a fading error message. The text of the message can be
+	 * passed into the method as a parameter.
+	 */
+	private void playMessage(final String pMessage) {
+		errorMessage.setText(pMessage);
+		fade.stop();
+		errorMessage.setOpacity(1);
+		fade.play();
+	}
+
 	private void refresh() throws SQLException {
 		tblBooks.getItems().setAll(Book.getAll());
 		tcAuthor.setCellValueFactory(new PropertyValueFactory<>("Author"));
 		tcTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
 		tcGenre.setCellValueFactory(new PropertyValueFactory<>("Genre"));
 		tcLocation.setCellValueFactory(new PropertyValueFactory<>("Location"));
-		System.out.println("Refreshed");
 	}
 
 	@FXML
 	private void initialize() throws SQLException {
+		fade.setDuration(Duration.millis(5000));
+		fade.setFromValue(10);
+		fade.setToValue(0);
+		fade.setCycleCount(1000);
+		fade.setNode(errorMessage);
+		fade.setCycleCount(1);
 		refresh();
 	}
 
@@ -119,18 +151,28 @@ public class Controller {
 		myBook.setTitle(txtTitle.getText());
 		myBook.setGenre(txtGenre.getText());
 		myBook.setLocation(txtLocation.getText());
-		myBook.create();
+		if (!(txtAuthor.getText().isBlank()) && !(txtTitle.getText().isBlank()) && !(txtGenre.getText().isBlank())
+				&& !(txtLocation.getText().isBlank())) {
+			myBook.create();
+			playMessage("Book Saved");
+			refresh();
+		} else {
+			playMessage("Please Make Sure All Fields Have Something Before Saving");
+		}
 	}
 
 	@FXML
 	final void handleRefresh(final ActionEvent event) throws SQLException {
 		refresh();
+		playMessage("Database Refreshed");
 	}
 
 	@FXML
 	final void handleDelete(final ActionEvent event) throws SQLException {
 		myBook = tblBooks.getSelectionModel().getSelectedItem();
 		myBook.delete();
+		playMessage("Book Deleted");
+		refresh();
 	}
 
 	@FXML
@@ -148,7 +190,12 @@ public class Controller {
 		if (!txtLocation.getText().isBlank()) {
 			myBook.setLocation(txtLocation.getText());
 		}
-		myBook.update();
+		if (!(myBook == null)) {
+			myBook.update();
+			playMessage("Book Updated");
+			refresh();
+		} else {
+			playMessage("Please Select A Book To Update");
+		}
 	}
-
 }
