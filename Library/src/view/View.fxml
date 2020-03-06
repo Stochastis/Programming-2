@@ -17,16 +17,18 @@
 	fx:controller="controller.Controller">
 	<children>
 		<TableView fx:id="tblBooks" layoutY="124.0"
-			prefHeight="276.0" prefWidth="600.0">
+	prefHeight="276.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0"
+	AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+	AnchorPane.topAnchor="124.0">
 			<columns>
 				<TableColumn fx:id="tcAuthor" prefWidth="149.75"
-					text="Author" />
+					resizable="false" text="Author" />
 				<TableColumn fx:id="tcTitle" prefWidth="149.75"
-					text="Title" />
+					resizable="false" text="Title" />
 				<TableColumn fx:id="tcGenre" prefWidth="149.75"
-					text="Genre" />
+					resizable="false" text="Genre" />
 				<TableColumn fx:id="tcLocation" prefWidth="149.75"
-					text="Location" />
+					resizable="false" text="Location" />
 			</columns>
 		</TableView>
 		<TextField fx:id="txtAuthor" layoutX="14.0" layoutY="14.0"
