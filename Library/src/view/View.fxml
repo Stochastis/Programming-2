@@ -17,9 +17,9 @@
 	fx:controller="controller.Controller">
 	<children>
 		<TableView fx:id="tblBooks" layoutY="124.0"
-	prefHeight="276.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0"
-	AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-	AnchorPane.topAnchor="124.0">
+			prefHeight="276.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0"
+			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+			AnchorPane.topAnchor="124.0">
 			<columns>
 				<TableColumn fx:id="tcAuthor" prefWidth="149.75"
 					resizable="false" text="Author" />
