@@ -147,12 +147,13 @@ public class Controller {
 
 	@FXML
 	final void handleSave(final ActionEvent event) throws SQLException {
-		myBook.setAuthor(txtAuthor.getText());
-		myBook.setTitle(txtTitle.getText());
-		myBook.setGenre(txtGenre.getText());
-		myBook.setLocation(txtLocation.getText());
+		myBook = new Book();
 		if (!(txtAuthor.getText().isBlank()) && !(txtTitle.getText().isBlank()) && !(txtGenre.getText().isBlank())
 				&& !(txtLocation.getText().isBlank())) {
+			myBook.setAuthor(txtAuthor.getText());
+			myBook.setTitle(txtTitle.getText());
+			myBook.setGenre(txtGenre.getText());
+			myBook.setLocation(txtLocation.getText());
 			myBook.create();
 			playMessage("Book Saved");
 			refresh();
@@ -170,14 +171,23 @@ public class Controller {
 	@FXML
 	final void handleDelete(final ActionEvent event) throws SQLException {
 		myBook = tblBooks.getSelectionModel().getSelectedItem();
-		myBook.delete();
-		playMessage("Book Deleted");
-		refresh();
+		if (myBook == null) {
+			playMessage("Please Select A Book To Delete");
+		} else {
+			myBook.delete();
+			playMessage("Book Deleted");
+			refresh();
+		}
 	}
 
 	@FXML
-	final void handleUpdate(final ActionEvent event) throws SQLException {
+	final int handleUpdate(final ActionEvent event) throws SQLException {
 		myBook = tblBooks.getSelectionModel().getSelectedItem();
+
+		if (myBook == null) {
+			playMessage("Please Select A Book To Update");
+			return 0;
+		}
 		if (!txtAuthor.getText().isBlank()) {
 			myBook.setAuthor(txtAuthor.getText());
 		}
@@ -190,12 +200,9 @@ public class Controller {
 		if (!txtLocation.getText().isBlank()) {
 			myBook.setLocation(txtLocation.getText());
 		}
-		if (!(myBook == null)) {
-			myBook.update();
-			playMessage("Book Updated");
-			refresh();
-		} else {
-			playMessage("Please Select A Book To Update");
-		}
+		myBook.update();
+		playMessage("Book Updated");
+		refresh();
+		return 0;
 	}
 }
