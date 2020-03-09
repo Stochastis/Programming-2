@@ -5,6 +5,7 @@ import model.Book;
 import java.sql.SQLException;
 
 import javafx.animation.FadeTransition;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -96,6 +97,12 @@ public class Controller {
 	 */
 	@FXML
 	private TextField txtTitle;
+
+	/**
+	 * 
+	 */
+	@FXML // fx:id="txtSearch"
+	private TextField txtSearch; // Value injected by FXMLLoader
 
 	/**
 	 * 
@@ -204,5 +211,10 @@ public class Controller {
 		playMessage("Book Updated");
 		refresh();
 		return 0;
+	}
+
+	@FXML
+	void handleSearch(final ActionEvent event) {
+
 	}
 }
