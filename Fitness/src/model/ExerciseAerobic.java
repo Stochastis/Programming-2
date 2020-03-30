@@ -3,7 +3,15 @@
  */
 package model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import db.Database;
+import db.Parameter;
 
 /**
  * @author Caleb
@@ -72,5 +80,29 @@ public class ExerciseAerobic extends Exercise {
 	void delete() {
 		// TODO Auto-generated method stub
 
+	}
+
+	public static List<ExerciseAerobic> getAll(Person pPerson) throws SQLException {
+		Database db = new Database("db.cberkstresser.name", "Exercise");
+		List<ExerciseAerobic> allExercises = new ArrayList<>();
+		List<Parameter<?>> params = new ArrayList<>();
+
+		params.add(new Parameter<Integer>(pPerson.getStudentID()));
+
+		ResultSet rsExerciseAerobic = db.getResultSet("usp_GetAerobicExercisesByPerson", params);
+
+		while (rsExerciseAerobic.next()) {
+			ExerciseAerobic e = new ExerciseAerobic();
+			e.setExerciseDate(rsExerciseAerobic.getDate("ExerciseDate").toLocalDate());
+			e.setExerciseDuration(Duration.ofSeconds(rsExerciseAerobic.getInt("ExerciseSeconds")));
+			System.out.println(Duration.ofSeconds(rsExerciseAerobic.getInt("ExerciseSeconds")));
+			e.setExerciseName(rsExerciseAerobic.getString("ExerciseName"));
+			e.setStudentID(rsExerciseAerobic.getInt("StudentID"));
+			e.averageHeartRate = rsExerciseAerobic.getInt("AverageHeartRate");
+			e.distance = rsExerciseAerobic.getDouble("Distance");
+			e.maxHeartRate = rsExerciseAerobic.getInt("MaxHeartRate");
+			allExercises.add(e);
+		}
+		return allExercises;
 	}
 }

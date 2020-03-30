@@ -3,8 +3,13 @@
  */
 package model;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+
+import db.Database;
+import db.Parameter;
 
 /**
  * @author Caleb
@@ -149,11 +154,27 @@ public class Person {
 
 	}
 
-	public void save() {
+	public void save() throws SQLException {
+		Database db = new Database("db.cberkstresser.name", "Exercise");
+		List<Parameter<?>> params = new ArrayList<>();
+
+		params.add(new Parameter<Integer>(studentID));
+		params.add(new Parameter<Gender>(gender));
+		params.add(new Parameter<LocalDate>(birthdate));
+		params.add(new Parameter<Double>(height));
+		params.add(new Parameter<Double>(weight));
+		params.add(new Parameter<List<?>>(exercises));
+
+		db.executeSql("usp_SavePerson", params);
 
 	}
 
-	public void delete() {
+	public void delete() throws SQLException {
+		Database db = new Database("db.cberkstresser.name", "Exercise");
+		List<Parameter<?>> params = new ArrayList<>();
 
+		params.add(new Parameter<Integer>(studentID));
+
+		db.executeSql("usp_DeletePerson", params);
 	}
 }

@@ -5,7 +5,6 @@ import model.Book;
 import java.sql.SQLException;
 
 import javafx.animation.FadeTransition;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
