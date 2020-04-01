@@ -4,6 +4,7 @@
 
 package controller;
 
+import model.Exercise;
 import model.ExerciseAerobic;
 import model.ExerciseStrength;
 import model.Gender;
@@ -17,12 +18,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Duration;
+import java.time.Duration;
 import java.time.LocalDate;
 
 public class Controller {
@@ -57,6 +59,24 @@ public class Controller {
 	@FXML // fx:id="tcDistance"
 	private TableColumn<Double, ExerciseAerobic> tcAerobicDistance; // Value injected by FXMLLoader
 
+	@FXML // fx:id="tcStrengthDate"
+	private TableColumn<LocalDate, ExerciseStrength> tcStrengthDate; // Value injected by FXMLLoader
+
+	@FXML // fx:id="tcStrengthName"
+	private TableColumn<String, ExerciseStrength> tcStrengthName; // Value injected by FXMLLoader
+
+	@FXML // fx:id="tcStrengthDuration"
+	private TableColumn<Duration, ExerciseStrength> tcStrengthDuration; // Value injected by FXMLLoader
+
+	@FXML // fx:id="tcStrengthSets"
+	private TableColumn<Integer, ExerciseStrength> tcStrengthSets; // Value injected by FXMLLoader
+
+	@FXML // fx:id="tcStrengthReps"
+	private TableColumn<Integer, ExerciseStrength> tcStrengthReps; // Value injected by FXMLLoader
+
+	@FXML // fx:id="tcStrengthWeight"
+	private TableColumn<Double, ExerciseStrength> tcStrengthWeight; // Value injected by FXMLLoader
+
 	@FXML // fx:id="txtStudentID"
 	private TextField txtStudentID; // Value injected by FXMLLoader
 
@@ -69,11 +89,29 @@ public class Controller {
 	@FXML // fx:id="txtHeight"
 	private TextField txtHeight; // Value injected by FXMLLoader
 
+	@FXML // fx:id="txtExerciseName"
+	private TextField txtExerciseName; // Value injected by FXMLLoader
+
+	@FXML // fx:id="txtExerciseDuration"
+	private TextField txtExerciseDuration; // Value injected by FXMLLoader
+
+	@FXML // fx:id="txtExerciseMHRS"
+	private TextField txtExerciseMHRS; // Value injected by FXMLLoader
+
+	@FXML // fx:id="txtExerciseAHRR"
+	private TextField txtExerciseAHRR; // Value injected by FXMLLoader
+
+	@FXML // fx:id="txtExerciseDWL"
+	private TextField txtExerciseDWL; // Value injected by FXMLLoader
+
+	@FXML // fx:id="txtExerciseDate"
+	private DatePicker txtExerciseDate; // Value injected by FXMLLoader
+
 	@FXML // fx:id="btnSave"
-	private Button btnSave; // Value injected by FXMLLoader
+	private Button btnSavePerson; // Value injected by FXMLLoader
 
 	@FXML // fx:id="btnDelete"
-	private Button btnDelete; // Value injected by FXMLLoader
+	private Button btnDeletePerson; // Value injected by FXMLLoader
 
 	@FXML // fx:id="btnAddExercise"
 	private Button btnAddExercise; // Value injected by FXMLLoader
@@ -102,6 +140,12 @@ public class Controller {
 	@FXML // fx:id="btnLoad"
 	private Button btnLoad; // Value injected by FXMLLoader
 
+	@FXML // fx:id="btnAerobic"
+	private RadioButton btnAerobic; // Value injected by FXMLLoader
+
+	@FXML // fx:id="btnStrength"
+	private RadioButton btnStrength; // Value injected by FXMLLoader
+
 	/**
 	 * This is a fading animation that can be called whenever it is needed.
 	 */
@@ -126,6 +170,14 @@ public class Controller {
 		tcAerobicName.setCellValueFactory(new PropertyValueFactory<>("ExerciseName"));
 		tcAerobicDate.setCellValueFactory(new PropertyValueFactory<>("ExerciseDate"));
 		tcAerobicDuration.setCellValueFactory(new PropertyValueFactory<>("ExerciseSeconds"));
+
+		tblExerciseStrength.getItems().setAll(ExerciseStrength.getAll(pPerson));
+		tcStrengthReps.setCellValueFactory((new PropertyValueFactory<>("Reps")));
+		tcStrengthSets.setCellValueFactory(new PropertyValueFactory<>("Sets"));
+		tcStrengthWeight.setCellValueFactory(new PropertyValueFactory<>("WeightLifted"));
+		tcStrengthName.setCellValueFactory(new PropertyValueFactory<>("ExerciseName"));
+		tcStrengthDate.setCellValueFactory(new PropertyValueFactory<>("ExerciseDate"));
+		tcStrengthDuration.setCellValueFactory(new PropertyValueFactory<>("ExerciseSeconds"));
 	}
 
 	@FXML
@@ -133,7 +185,7 @@ public class Controller {
 		txtGender.getItems().add(Gender.MALE);
 		txtGender.getItems().add(Gender.FEMALE);
 		txtGender.getItems().add(Gender.UNSPECIFIED);
-		fade.setDuration(Duration.millis(5000));
+		fade.setDuration(new javafx.util.Duration(5000));
 		fade.setFromValue(10);
 		fade.setToValue(0);
 		fade.setCycleCount(1000);
@@ -142,7 +194,7 @@ public class Controller {
 	}
 
 	@FXML
-	final void handleSave(final ActionEvent event) throws SQLException {
+	final void handleSavePerson(final ActionEvent event) throws SQLException {
 		myPerson = new Person();
 		if (!(txtBirthdate.getValue() == null) && !(txtFirstName.getText().isBlank())
 				&& !(txtGender.getSelectionModel().isEmpty()) && !(txtHeight.getText().isBlank())
@@ -179,7 +231,7 @@ public class Controller {
 	}
 
 	@FXML
-	final void handleDelete(final ActionEvent event) throws SQLException {
+	final void handleDeletePerson(final ActionEvent event) throws SQLException {
 		myPerson = new Person();
 		myPerson.setStudentID(Integer.parseInt(txtStudentID.getText()));
 		if (myPerson == null) {
@@ -196,5 +248,55 @@ public class Controller {
 			txtWeight.setText("");
 			refresh(myPerson);
 		}
+	}
+
+	@FXML
+	void handleSelectAerobic(ActionEvent event) {
+		txtExerciseAHRR.setPromptText("Average Heart Rate");
+		txtExerciseDWL.setPromptText("Duration");
+		txtExerciseMHRS.setPromptText("Max Heart Rate");
+	}
+
+	@FXML
+	void handleSelectStrength(ActionEvent event) {
+		txtExerciseAHRR.setPromptText("Reps");
+		txtExerciseDWL.setPromptText("Weight Lifted");
+		txtExerciseMHRS.setPromptText("Sets");
+	}
+
+	@FXML
+	void handleAddExercise(ActionEvent event) throws SQLException {
+		if (btnAerobic.isSelected()) {
+			ExerciseAerobic myExercise = new ExerciseAerobic();
+			if (!(txtExerciseAHRR.getText().isBlank()) && !(txtExerciseDuration.getText().isBlank())
+					&& !(txtExerciseDWL.getText().isBlank()) && !(txtExerciseDate.getValue() == null)
+					&& !(txtExerciseMHRS.getText().isBlank()) && !(txtExerciseName.getText().isBlank())) {
+				myExercise.setAverageHeartRate(Integer.parseInt(txtExerciseAHRR.getText()));
+				myExercise.setDistance(Double.parseDouble(txtExerciseDWL.getText()));
+				myExercise.setExerciseDate(txtExerciseDate.getValue());
+				myExercise.setExerciseDuration(Duration.ofSeconds((Long.parseLong((txtExerciseDuration.getText())))));
+				myPerson.save();
+				playMessage("Person Saved");
+				refresh(myPerson);
+			} else {
+				playMessage("Please Make Sure All Fields Have Something Before Saving");
+			}
+		} else {
+			Exercise myExercise = new ExerciseStrength();
+			if (!(txtExerciseAHRR.getText().isBlank()) && !(txtExerciseDuration.getText().isBlank())
+					&& !(txtExerciseDWL.getText().isBlank()) && !(txtExerciseDate.getValue() == null)
+					&& !(txtExerciseMHRS.getText().isBlank()) && !(txtExerciseName.getText().isBlank())) {
+				myPerson.save();
+				playMessage("Person Saved");
+				refresh(myPerson);
+			} else {
+				playMessage("Please Make Sure All Fields Have Something Before Saving");
+			}
+		}
+	}
+
+	@FXML
+	void handleDeleteExercise(ActionEvent event) {
+
 	}
 }
