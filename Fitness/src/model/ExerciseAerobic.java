@@ -95,7 +95,6 @@ public class ExerciseAerobic extends Exercise {
 			ExerciseAerobic e = new ExerciseAerobic();
 			e.setExerciseDate(rsExerciseAerobic.getDate("ExerciseDate").toLocalDate());
 			e.setExerciseDuration(Duration.ofSeconds(rsExerciseAerobic.getInt("ExerciseSeconds")));
-			System.out.println(Duration.ofSeconds(rsExerciseAerobic.getInt("ExerciseSeconds")));
 			e.setExerciseName(rsExerciseAerobic.getString("ExerciseName"));
 			e.setStudentID(rsExerciseAerobic.getInt("StudentID"));
 			e.averageHeartRate = rsExerciseAerobic.getInt("AverageHeartRate");

@@ -3,10 +3,12 @@
  */
 package model;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import db.Database;
 import db.Parameter;
@@ -17,11 +19,11 @@ import db.Parameter;
  */
 public class Person {
 	private int studentID;
-	private List<Exercise> exercises;
-	private String firstName;
-	private String lastName;
-	private double height;
-	private double weight;
+	private List<Exercise> exercises = new ArrayList<>();
+	private String firstName, lastName;
+	private double height, weight;
+	private Gender gender;
+	private LocalDate birthdate;
 
 	/**
 	 * @return the studentID
@@ -135,9 +137,6 @@ public class Person {
 		this.birthdate = birthdate;
 	}
 
-	private Gender gender;
-	private LocalDate birthdate;
-
 	public int getAge() {
 		return 0;
 	}
@@ -150,8 +149,21 @@ public class Person {
 
 	}
 
-	public void load(int pStudentID) {
+	public void load(int pStudentID) throws SQLException {
+		Database db = new Database("db.cberkstresser.name", "Exercise");
+		List<Parameter<?>> params = new ArrayList<>();
 
+		params.add(new Parameter<Integer>(studentID));
+
+		ResultSet rsPerson = db.getResultSet("usp_GetPerson", params);
+		rsPerson.next();
+
+		gender = Gender.valueOf(rsPerson.getString("Gender"));
+		birthdate = rsPerson.getDate("Birthdate").toLocalDate();
+		firstName = rsPerson.getString("FirstName");
+		lastName = rsPerson.getString("LastName");
+		height = rsPerson.getDouble("Height");
+		weight = rsPerson.getDouble("Weight");
 	}
 
 	public void save() throws SQLException {
@@ -159,11 +171,12 @@ public class Person {
 		List<Parameter<?>> params = new ArrayList<>();
 
 		params.add(new Parameter<Integer>(studentID));
-		params.add(new Parameter<Gender>(gender));
-		params.add(new Parameter<LocalDate>(birthdate));
+		params.add(new Parameter<String>(firstName));
+		params.add(new Parameter<String>(lastName));
 		params.add(new Parameter<Double>(height));
 		params.add(new Parameter<Double>(weight));
-		params.add(new Parameter<List<?>>(exercises));
+		params.add(new Parameter<String>(gender.toString()));
+		params.add(new Parameter<LocalDate>(birthdate));
 
 		db.executeSql("usp_SavePerson", params);
 
@@ -176,5 +189,17 @@ public class Person {
 		params.add(new Parameter<Integer>(studentID));
 
 		db.executeSql("usp_DeletePerson", params);
+	}
+
+	public void clearAllExercises() {
+		exercises.clear();
+	}
+
+	public List<Exercise> getStrengthExercises() {
+		return exercises.stream().filter(x -> x instanceof ExerciseStrength).collect(Collectors.toList());
+	}
+
+	public List<Exercise> getAerobicExercises() {
+		return exercises.stream().filter(x -> x instanceof ExerciseAerobic).collect(Collectors.toList());
 	}
 }

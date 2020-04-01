@@ -71,6 +71,14 @@ public abstract class Exercise {
 		return exerciseDuration;
 	}
 
+	public long getExerciseSeconds() {
+		return exerciseDuration.toSeconds();
+	}
+
+	public long getExerciseMinutes() {
+		return exerciseDuration.toMinutes();
+	}
+
 	/**
 	 * @param exerciseDuration the exerciseDuration to set
 	 */

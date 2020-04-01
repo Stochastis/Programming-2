@@ -9,10 +9,7 @@ import model.ExerciseStrength;
 import model.Gender;
 import model.Person;
 
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
-
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +22,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import java.time.LocalDate;
 
@@ -79,6 +75,12 @@ public class Controller {
 	@FXML // fx:id="btnDelete"
 	private Button btnDelete; // Value injected by FXMLLoader
 
+	@FXML // fx:id="btnAddExercise"
+	private Button btnAddExercise; // Value injected by FXMLLoader
+
+	@FXML // fx:id="btnDeleteExercise"
+	private Button btnDeleteExercise; // Value injected by FXMLLoader
+
 	@FXML // fx:id="errorMessage"
 	private Label errorMessage; // Value injected by FXMLLoader
 
@@ -89,7 +91,7 @@ public class Controller {
 	private TextField txtWeight; // Value injected by FXMLLoader
 
 	@FXML // fx:id="txtGender"
-	private ChoiceBox<?> txtGender; // Value injected by FXMLLoader
+	private ChoiceBox<Gender> txtGender; // Value injected by FXMLLoader
 
 	@FXML // fx:id="txtBirthdate"
 	private DatePicker txtBirthdate; // Value injected by FXMLLoader
@@ -128,9 +130,9 @@ public class Controller {
 
 	@FXML
 	private void initialize() throws SQLException {
-//		txtGender.getItems().add("China");
-//		txtGender.getItems().add("Germany");
-//		txtGender.getItems().add("United States");
+		txtGender.getItems().add(Gender.MALE);
+		txtGender.getItems().add(Gender.FEMALE);
+		txtGender.getItems().add(Gender.UNSPECIFIED);
 		fade.setDuration(Duration.millis(5000));
 		fade.setFromValue(10);
 		fade.setToValue(0);
@@ -164,6 +166,15 @@ public class Controller {
 	void handleLoad(ActionEvent event) throws SQLException {
 		myPerson = new Person();
 		myPerson.setStudentID(Integer.parseInt(txtStudentID.getText()));
+		myPerson.load(myPerson.getStudentID());
+
+		txtBirthdate.setValue(myPerson.getBirthdate());
+		txtFirstName.setText(myPerson.getFirstName());
+		txtGender.setValue(myPerson.getGender());
+		txtHeight.setText(Double.toString(myPerson.getHeight()));
+		txtLastName.setText(myPerson.getLastName());
+		txtWeight.setText(Double.toString(myPerson.getWeight()));
+
 		refresh(myPerson);
 	}
 
@@ -175,7 +186,14 @@ public class Controller {
 			playMessage("Please Select A Book To Delete");
 		} else {
 			myPerson.delete();
-			playMessage("Book Deleted");
+			playMessage("Person Deleted");
+			txtBirthdate.setValue(null);
+			txtFirstName.setText("");
+			txtGender.setValue(null);
+			txtHeight.setText("");
+			txtLastName.setText("");
+			txtStudentID.setText("");
+			txtWeight.setText("");
 			refresh(myPerson);
 		}
 	}
