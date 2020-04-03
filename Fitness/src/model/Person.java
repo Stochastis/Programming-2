@@ -158,7 +158,13 @@ public class Person {
 		ResultSet rsPerson = db.getResultSet("usp_GetPerson", params);
 		rsPerson.next();
 
-		gender = Gender.valueOf(rsPerson.getString("Gender"));
+		String genderString = rsPerson.getString("Gender").toUpperCase();
+		// Debugging: Proper genderString here.
+		if (genderString.equals("MALE") && genderString.equals("FEMALE")) {
+			gender = Gender.UNSPECIFIED;
+		} else {
+			gender = Gender.valueOf(genderString);
+		}
 		birthdate = rsPerson.getDate("Birthdate").toLocalDate();
 		firstName = rsPerson.getString("FirstName");
 		lastName = rsPerson.getString("LastName");

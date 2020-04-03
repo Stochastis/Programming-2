@@ -71,7 +71,7 @@ public class ExerciseStrength extends Exercise {
 	}
 
 	@Override
-	void save() {
+	void save(Person pPerson) {
 		// TODO Auto-generated method stub
 
 	}

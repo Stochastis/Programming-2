@@ -271,12 +271,20 @@ public class Controller {
 			if (!(txtExerciseAHRR.getText().isBlank()) && !(txtExerciseDuration.getText().isBlank())
 					&& !(txtExerciseDWL.getText().isBlank()) && !(txtExerciseDate.getValue() == null)
 					&& !(txtExerciseMHRS.getText().isBlank()) && !(txtExerciseName.getText().isBlank())) {
+				myExercise.setExerciseName(txtExerciseName.getText());
+				System.out.println(myExercise.getExerciseName());
+				myExercise.setMaxHeartRate(Integer.parseInt(txtExerciseMHRS.getText()));
+				System.out.println(myExercise.getMaxHeartRate());
 				myExercise.setAverageHeartRate(Integer.parseInt(txtExerciseAHRR.getText()));
+				System.out.println(myExercise.getAverageHeartRate());
 				myExercise.setDistance(Double.parseDouble(txtExerciseDWL.getText()));
+				System.out.println(myExercise.getDistance());
 				myExercise.setExerciseDate(txtExerciseDate.getValue());
+				System.out.println(myExercise.getExerciseDate());
 				myExercise.setExerciseDuration(Duration.ofSeconds((Long.parseLong((txtExerciseDuration.getText())))));
-				myPerson.save();
-				playMessage("Person Saved");
+				System.out.println(myExercise.getExerciseDuration());
+				myExercise.save(myPerson);
+				playMessage("Exercise Saved");
 				refresh(myPerson);
 			} else {
 				playMessage("Please Make Sure All Fields Have Something Before Saving");

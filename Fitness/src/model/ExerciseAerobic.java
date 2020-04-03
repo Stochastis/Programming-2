@@ -71,9 +71,19 @@ public class ExerciseAerobic extends Exercise {
 	}
 
 	@Override
-	void save() {
-		// TODO Auto-generated method stub
+	public void save(Person pPerson) throws SQLException {
+		Database db = new Database("db.cberkstresser.name", "Exercise");
+		List<Parameter<?>> params = new ArrayList<>();
 
+		params.add(new Parameter<Integer>(pPerson.getStudentID()));
+		params.add(new Parameter<LocalDate>(getExerciseDate()));
+		params.add(new Parameter<String>(getExerciseName()));
+		params.add(new Parameter<Long>(getExerciseSeconds()));
+		params.add(new Parameter<Integer>(maxHeartRate));
+		params.add(new Parameter<Integer>(averageHeartRate));
+		params.add(new Parameter<Double>(distance));
+
+		db.executeSql("usp_SaveExerciseAerobic", params);
 	}
 
 	@Override

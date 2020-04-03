@@ -3,6 +3,7 @@
  */
 package model;
 
+import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDate;
 
@@ -18,7 +19,7 @@ public abstract class Exercise {
 
 	abstract void load(int pStudentID, LocalDate pExerciseDate, String pExerciseName);
 
-	abstract void save();
+	abstract void save(Person pPerson) throws SQLException;
 
 	abstract void delete();
 
