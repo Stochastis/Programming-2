@@ -234,6 +234,12 @@ public class Controller {
 	 * 
 	 */
 
+	@FXML // fx:id="btnNewStudent"
+	private Button btnNewStudent; // Value injected by FXMLLoader
+	/**
+	 * 
+	 */
+
 	@FXML // fx:id="btnSave"
 	private Button btnSavePerson; // Value injected by FXMLLoader
 	/**
@@ -300,9 +306,31 @@ public class Controller {
 	/**
 	 * This is a fading animation that can be called whenever it is needed.
 	 */
-
 	private FadeTransition fade = new FadeTransition();
 
+	/**
+	 * This is a method used for clearing all fields in the program so a new student
+	 * can be entered easily.
+	 * 
+	 * @throws SQLException
+	 */
+	@FXML
+	private void clearFieldsAll() throws SQLException {
+		myPerson = new Person();
+		clearFieldsExercise();
+		txtBirthdate.setValue(null);
+		txtFirstName.clear();
+		txtGender.setValue(null);
+		txtHeight.clear();
+		txtLastName.clear();
+		txtStudentID.clear();
+		txtWeight.clear();
+		refresh(myPerson);
+	}
+
+	/**
+	 * Clears all the fields for inputting an exercise.
+	 */
 	private void clearFieldsExercise() {
 		txtExerciseAHRR.clear();
 		txtExerciseDate.setValue(null);
@@ -313,8 +341,8 @@ public class Controller {
 	}
 
 	/*
-	 * This method displays a fading error message. The text of the message can be
-	 * passed into the method as a parameter.
+	 * This method displays a fading message. The text of the message can be passed
+	 * into the method as a parameter.
 	 */
 	private void playMessage(final String pMessage) {
 		errorMessage.setText(pMessage);
@@ -439,10 +467,10 @@ public class Controller {
 	@FXML
 	final void handleSelectStrength(final ActionEvent event) {
 		txtExerciseAHRR.setPromptText("Reps");
-		txtExerciseDWL.setPromptText("Weight Lifted");
+		txtExerciseDWL.setPromptText("Weight Lifted (lbs)");
 		txtExerciseMHRS.setPromptText("Sets");
 		lbAHRR.setText("Reps:");
-		lbDWL.setText("Weight Lifted:");
+		lbDWL.setText("Weight Lifted (lbs):");
 		lbMHRS.setText("Sets:");
 	}
 

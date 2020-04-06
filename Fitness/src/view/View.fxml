@@ -37,15 +37,18 @@
 			prefHeight="25.0" prefWidth="174.0" />
 		<DatePicker fx:id="txtBirthdate" layoutX="118.0"
 			layoutY="132.0" promptText="M/DD/YYYY" />
-		<Button fx:id="btnSavePerson" layoutX="29.0" layoutY="176.0"
+		<Button fx:id="btnNewStudent" layoutX="23.0" layoutY="176.0"
+			mnemonicParsing="false" onAction="#clearFieldsAll" prefHeight="25.0"
+			prefWidth="89.0" text="New Student" />
+		<Button fx:id="btnSavePerson" layoutX="126.0" layoutY="176.0"
 			mnemonicParsing="false" onAction="#handleSavePerson"
 			prefHeight="25.0" prefWidth="89.0" text="Save Student" />
-		<Button fx:id="btnDeletePerson" layoutX="139.0" layoutY="176.0"
-			mnemonicParsing="false" onAction="#handleDeletePerson"
-			prefHeight="25.0" prefWidth="95.0" text="Delete Student" />
-		<Button fx:id="btnLoad" layoutX="255.0" layoutY="176.0"
+		<Button fx:id="btnLoad" layoutX="230.0" layoutY="176.0"
 			mnemonicParsing="false" onAction="#handleLoad" prefHeight="25.0"
 			prefWidth="89.0" text="Load Student" />
+		<Button fx:id="btnDeletePerson" layoutX="335.0" layoutY="176.0"
+			mnemonicParsing="false" onAction="#handleDeletePerson"
+			prefHeight="25.0" prefWidth="95.0" text="Delete Student" />
 		<RadioButton fx:id="btnAerobic" layoutX="128.0"
 			layoutY="255.0" mnemonicParsing="false"
 			onAction="#handleSelectAerobic" selected="true" text="Aerobic">
@@ -138,8 +141,8 @@
 				</Tab>
 			</tabs>
 		</TabPane>
-		<Label fx:id="errorMessage" layoutX="426.0" layoutY="180.0"
-			opacity="0.0" prefHeight="105.0" prefWidth="466.0" text="Placeholder"
+		<Label fx:id="errorMessage" layoutX="403.0" layoutY="203.0"
+			opacity="0.0" prefHeight="100.0" prefWidth="466.0" text="Placeholder"
 			wrapText="true">
 			<font>
 				<Font name="System Bold" size="21.0" />
@@ -176,6 +179,6 @@
 		<Label fx:id="lbAHRR" layoutX="29.0" layoutY="417.0"
 			prefHeight="17.0" prefWidth="114.0" text="Average Heart Rate:" />
 		<Label fx:id="lbDWL" layoutX="29.0" layoutY="442.0"
-			prefHeight="17.0" prefWidth="95.0" text="Distance (Miles):" />
+			prefHeight="17.0" prefWidth="114.0" text="Distance (Miles):" />
 	</children>
 </AnchorPane>
