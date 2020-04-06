@@ -469,21 +469,26 @@ public class Controller {
 				}
 
 				if (!error) {
-					System.out.println("Debug: " + myExercise.getMaxHeartRate());
-					System.out.println("Debug: " + myExercise.getAverageHeartRate());
-					System.out.println("Debug: " + myExercise.getDistance());
-					System.out.println("Debug: " + myExercise.getExerciseSeconds());
 
+					// Check to see if there is a non-zero value in each field
 					if (myExercise.getMaxHeartRate() > 0 && myExercise.getAverageHeartRate() > 0
 							&& !(myExercise.getDistance() < 0) && myExercise.getExerciseSeconds() > 0) {
-						if (myExercise.getDistance() == 0) {
-							myExercise.save(myPerson, false);
+
+						// Check to see that MHR is greater than AHR
+						if (myExercise.getMaxHeartRate() < myExercise.getAverageHeartRate()) {
+							playMessage("Please Make Sure The Max Heart Rate Is Greater Than The Average Heart Rate");
 						} else {
-							myExercise.save(myPerson, true);
+
+							// Check to see if the person moved or not
+							if (myExercise.getDistance() == 0) {
+								myExercise.save(myPerson, false);
+							} else {
+								myExercise.save(myPerson, true);
+							}
+							playMessage("Exercise Saved");
+							refresh(myPerson);
+							clearFieldsExercise();
 						}
-						playMessage("Exercise Saved");
-						refresh(myPerson);
-						clearFieldsExercise();
 					} else {
 						playMessage("Please Enter Positive Values For All Fields");
 					}
@@ -513,7 +518,7 @@ public class Controller {
 
 				if (!error) {
 					if (myExercise.getReps() > 0 && myExercise.getSets() > 0 && myExercise.getWeightLifted() > 0
-							&& myExercise.getExerciseMinutes() > 0) {
+							&& myExercise.getExerciseSeconds() > 0) {
 						myExercise.save(myPerson, true);
 						playMessage("Exercise Saved");
 						refresh(myPerson);
