@@ -8,5 +8,8 @@ package model;
  *
  */
 public enum Gender {
+	/**
+	 * The list of genders for the students using the program.
+	 */
 	MALE, FEMALE, UNSPECIFIED
 }

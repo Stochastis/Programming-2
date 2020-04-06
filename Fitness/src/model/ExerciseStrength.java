@@ -18,14 +18,21 @@ import db.Parameter;
  *
  */
 public class ExerciseStrength extends Exercise {
+	/**
+	 * The number of sets of the exercise.
+	 */
 	private int sets;
+	/**
+	 * The repetitions per set of the exercise.
+	 */
 	private int reps;
+	/**
+	 * The weight lifted each repetition during the exercise.
+	 */
 	private double weightLifted;
 
 	@Override
-	void load(int pStudentID, LocalDate pExerciseDate, String pExerciseName) {
-		// TODO Auto-generated method stub
-
+	void load(final int pStudentID, final LocalDate pExerciseDate, final String pExerciseName) {
 	}
 
 	/**
@@ -38,7 +45,7 @@ public class ExerciseStrength extends Exercise {
 	/**
 	 * @param sets the sets to set
 	 */
-	public void setSets(int sets) {
+	public void setSets(final int sets) {
 		this.sets = sets;
 	}
 
@@ -52,7 +59,7 @@ public class ExerciseStrength extends Exercise {
 	/**
 	 * @param reps the reps to set
 	 */
-	public void setReps(int reps) {
+	public void setReps(final int reps) {
 		this.reps = reps;
 	}
 
@@ -66,23 +73,47 @@ public class ExerciseStrength extends Exercise {
 	/**
 	 * @param weightLifted the weightLifted to set
 	 */
-	public void setWeightLifted(double weightLifted) {
+	public void setWeightLifted(final double weightLifted) {
 		this.weightLifted = weightLifted;
 	}
 
 	@Override
-	void save(Person pPerson) {
-		// TODO Auto-generated method stub
+	public final void save(final Person pPerson, boolean pBoolean) throws SQLException {
+		Database db = new Database("db.cberkstresser.name", "Exercise");
+		List<Parameter<?>> params = new ArrayList<>();
 
+		params.add(new Parameter<Integer>(pPerson.getStudentID()));
+		params.add(new Parameter<LocalDate>(getExerciseDate()));
+		params.add(new Parameter<String>(getExerciseName()));
+		params.add(new Parameter<Long>(getExerciseSeconds()));
+		params.add(new Parameter<Integer>(reps));
+		params.add(new Parameter<Integer>(sets));
+		params.add(new Parameter<Double>(weightLifted));
+
+		db.executeSql("usp_SaveExerciseStrength", params);
 	}
 
 	@Override
-	void delete() {
-		// TODO Auto-generated method stub
+	public final void delete(final Person pPerson) throws SQLException {
+		Database db = new Database("db.cberkstresser.name", "Exercise");
+		List<Parameter<?>> params = new ArrayList<>();
 
+		params.add(new Parameter<Integer>(pPerson.getStudentID()));
+		params.add(new Parameter<LocalDate>(getExerciseDate()));
+		params.add(new Parameter<String>(getExerciseName()));
+
+		db.executeSql("usp_DeleteExerciseStrength", params);
 	}
 
-	public static List<ExerciseStrength> getAll(Person pPerson) throws SQLException {
+	/**
+	 * Gets a list from the database of all the Strength Exercises associated with a
+	 * student.
+	 * 
+	 * @param pPerson Used for the student ID.
+	 * @return Returns the list of Strength Exercises associated with the student.
+	 * @throws SQLException
+	 */
+	public static List<ExerciseStrength> getAll(final Person pPerson) throws SQLException {
 		Database db = new Database("db.cberkstresser.name", "Exercise");
 		List<ExerciseStrength> allExercises = new ArrayList<>();
 		List<Parameter<?>> params = new ArrayList<>();

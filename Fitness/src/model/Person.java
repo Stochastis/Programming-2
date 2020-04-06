@@ -18,11 +18,29 @@ import db.Parameter;
  *
  */
 public class Person {
+	/**
+	 * The students unique Identification Number.
+	 */
 	private int studentID;
+	/**
+	 * The list of exercises associated with the student.
+	 */
 	private List<Exercise> exercises = new ArrayList<>();
+	/**
+	 * The first and last name of the student.
+	 */
 	private String firstName, lastName;
+	/**
+	 * The height (inches) and weight (pounds) of the student.
+	 */
 	private double height, weight;
+	/**
+	 * The gender of the student.
+	 */
 	private Gender gender;
+	/**
+	 * The birthdate of the student.
+	 */
 	private LocalDate birthdate;
 
 	/**
@@ -35,7 +53,7 @@ public class Person {
 	/**
 	 * @param studentID the studentID to set
 	 */
-	public void setStudentID(int studentID) {
+	public void setStudentID(final int studentID) {
 		this.studentID = studentID;
 	}
 
@@ -49,7 +67,7 @@ public class Person {
 	/**
 	 * @param exercises the exercises to set
 	 */
-	public void setExercises(List<Exercise> exercises) {
+	public void setExercises(final List<Exercise> exercises) {
 		this.exercises = exercises;
 	}
 
@@ -63,7 +81,7 @@ public class Person {
 	/**
 	 * @param firstName the firstName to set
 	 */
-	public void setFirstName(String firstName) {
+	public void setFirstName(final String firstName) {
 		this.firstName = firstName;
 	}
 
@@ -77,7 +95,7 @@ public class Person {
 	/**
 	 * @param lastName the lastName to set
 	 */
-	public void setLastName(String lastName) {
+	public void setLastName(final String lastName) {
 		this.lastName = lastName;
 	}
 
@@ -91,7 +109,7 @@ public class Person {
 	/**
 	 * @param height the height to set
 	 */
-	public void setHeight(double height) {
+	public void setHeight(final double height) {
 		this.height = height;
 	}
 
@@ -105,7 +123,7 @@ public class Person {
 	/**
 	 * @param weight the weight to set
 	 */
-	public void setWeight(double weight) {
+	public void setWeight(final double weight) {
 		this.weight = weight;
 	}
 
@@ -119,7 +137,7 @@ public class Person {
 	/**
 	 * @param gender the gender to set
 	 */
-	public void setGender(Gender gender) {
+	public void setGender(final Gender gender) {
 		this.gender = gender;
 	}
 
@@ -133,23 +151,35 @@ public class Person {
 	/**
 	 * @param birthdate the birthdate to set
 	 */
-	public void setBirthdate(LocalDate birthdate) {
+	public void setBirthdate(final LocalDate birthdate) {
 		this.birthdate = birthdate;
 	}
 
-	public int getAge() {
+	/**
+	 * This method returns the age of the student.
+	 * 
+	 * @return Returns the age of the student.
+	 */
+	public final int getAge() {
 		return 0;
 	}
 
-	public void addExercise(Exercise pExercise) {
+	/**
+	 * Method for adding an exercise to the students list of exercises.
+	 * 
+	 * @param pExercise The exercise to be added to the list.
+	 */
+	public void addExercise(final Exercise pExercise) {
 
 	}
 
-	public void removeExercise(int IndexToRemove) {
-
-	}
-
-	public void load(int pStudentID) throws SQLException {
+	/**
+	 * Method for loading the student from the databse into the program.
+	 * 
+	 * @param pStudentID The student's identification number.
+	 * @throws SQLException
+	 */
+	public final void load(final int pStudentID) throws SQLException {
 		Database db = new Database("db.cberkstresser.name", "Exercise");
 		List<Parameter<?>> params = new ArrayList<>();
 
@@ -172,7 +202,12 @@ public class Person {
 		weight = rsPerson.getDouble("Weight");
 	}
 
-	public void save() throws SQLException {
+	/**
+	 * Method for saving a new student into the database from the program.
+	 * 
+	 * @throws SQLException
+	 */
+	public final void save() throws SQLException {
 		Database db = new Database("db.cberkstresser.name", "Exercise");
 		List<Parameter<?>> params = new ArrayList<>();
 
@@ -188,7 +223,12 @@ public class Person {
 
 	}
 
-	public void delete() throws SQLException {
+	/**
+	 * Method from deleting a student from the database.
+	 * 
+	 * @throws SQLException
+	 */
+	public final void delete() throws SQLException {
 		Database db = new Database("db.cberkstresser.name", "Exercise");
 		List<Parameter<?>> params = new ArrayList<>();
 
@@ -197,15 +237,31 @@ public class Person {
 		db.executeSql("usp_DeletePerson", params);
 	}
 
-	public void clearAllExercises() {
+	/**
+	 * Method for removing all exercises from a student's list.
+	 */
+	public final void clearAllExercises() {
 		exercises.clear();
 	}
 
-	public List<Exercise> getStrengthExercises() {
+	/**
+	 * Method for retrieving a full list of Strength Exercises associated with the
+	 * student.
+	 * 
+	 * @return Returns a full list of Strength Exercises associated with the
+	 *         student.
+	 */
+	public final List<Exercise> getStrengthExercises() {
 		return exercises.stream().filter(x -> x instanceof ExerciseStrength).collect(Collectors.toList());
 	}
 
-	public List<Exercise> getAerobicExercises() {
+	/**
+	 * Method for retrieving a full list of Aerobic Exercises associated with the
+	 * student.
+	 * 
+	 * @return Returns a full list of Aerobic Exercises associated with the student.
+	 */
+	public final List<Exercise> getAerobicExercises() {
 		return exercises.stream().filter(x -> x instanceof ExerciseAerobic).collect(Collectors.toList());
 	}
 }

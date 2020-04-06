@@ -12,36 +12,98 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="978.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0"
+	prefWidth="978.0" xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="controller.Controller">
 	<children>
-		<TextField fx:id="txtStudentID" layoutX="14.0" layoutY="53.0" prefHeight="25.0" prefWidth="104.0" promptText="Student ID" />
-		<TextField fx:id="txtFirstName" layoutX="118.0" layoutY="53.0" prefHeight="25.0" prefWidth="104.0" promptText="First Name" />
-		<TextField fx:id="txtLastName" layoutX="222.0" layoutY="53.0" prefHeight="25.0" prefWidth="104.0" promptText="Last Name" />
-		<TextField fx:id="txtHeight" layoutX="326.0" layoutY="53.0" prefHeight="25.0" prefWidth="104.0" promptText="Height" />
-		<TextField fx:id="txtWeight" layoutX="426.0" layoutY="53.0" prefHeight="25.0" prefWidth="104.0" promptText="Weight" />
-		<ChoiceBox fx:id="txtGender" layoutX="118.0" layoutY="98.0" prefHeight="25.0" prefWidth="174.0" />
-		<DatePicker fx:id="txtBirthdate" layoutX="118.0" layoutY="132.0" promptText="M/DD/YYYY" />
-		<Button fx:id="btnSavePerson" layoutX="29.0" layoutY="176.0" mnemonicParsing="false" onAction="#handleSavePerson" prefHeight="25.0" prefWidth="89.0" text="Save Student" />
-		<Button fx:id="btnDeletePerson" layoutX="139.0" layoutY="176.0" mnemonicParsing="false" onAction="#handleDeletePerson" prefHeight="25.0" prefWidth="95.0" text="Delete Student" />
-		<Button fx:id="btnLoad" layoutX="255.0" layoutY="176.0" mnemonicParsing="false" onAction="#handleLoad" prefHeight="25.0" prefWidth="89.0" text="Load Student" />
-		<Label fx:id="errorMessage" layoutX="426.0" layoutY="180.0" opacity="0.0" prefHeight="17.0" prefWidth="343.0" text="Placeholder" />
-		<Label layoutX="357.0" layoutY="312.0" prefHeight="17.0" prefWidth="51.0" text="Search:" />
-		<TextField fx:id="txtSearch" editable="false" layoutX="403.0" layoutY="308.0" promptText="Work In Progress" />
-		<TabPane layoutX="357.0" layoutY="338.0" prefHeight="263.0" prefWidth="609.0" tabClosingPolicy="UNAVAILABLE">
+		<TextField fx:id="txtStudentID" layoutX="14.0"
+			layoutY="53.0" prefHeight="25.0" prefWidth="104.0"
+			promptText="Student ID" />
+		<TextField fx:id="txtFirstName" layoutX="119.0"
+			layoutY="53.0" prefHeight="25.0" prefWidth="104.0"
+			promptText="First Name" />
+		<TextField fx:id="txtLastName" layoutX="222.0"
+			layoutY="53.0" prefHeight="25.0" prefWidth="104.0"
+			promptText="Last Name" />
+		<TextField fx:id="txtHeight" layoutX="326.0" layoutY="53.0"
+			prefHeight="25.0" prefWidth="104.0" promptText="Height (in)" />
+		<TextField fx:id="txtWeight" layoutX="426.0" layoutY="53.0"
+			prefHeight="25.0" prefWidth="104.0" promptText="Weight (lbs)" />
+		<ChoiceBox fx:id="txtGender" layoutX="118.0" layoutY="98.0"
+			prefHeight="25.0" prefWidth="174.0" />
+		<DatePicker fx:id="txtBirthdate" layoutX="118.0"
+			layoutY="132.0" promptText="M/DD/YYYY" />
+		<Button fx:id="btnSavePerson" layoutX="29.0" layoutY="176.0"
+			mnemonicParsing="false" onAction="#handleSavePerson"
+			prefHeight="25.0" prefWidth="89.0" text="Save Student" />
+		<Button fx:id="btnDeletePerson" layoutX="139.0" layoutY="176.0"
+			mnemonicParsing="false" onAction="#handleDeletePerson"
+			prefHeight="25.0" prefWidth="95.0" text="Delete Student" />
+		<Button fx:id="btnLoad" layoutX="255.0" layoutY="176.0"
+			mnemonicParsing="false" onAction="#handleLoad" prefHeight="25.0"
+			prefWidth="89.0" text="Load Student" />
+		<RadioButton fx:id="btnAerobic" layoutX="128.0"
+			layoutY="255.0" mnemonicParsing="false"
+			onAction="#handleSelectAerobic" selected="true" text="Aerobic">
+			<toggleGroup>
+				<ToggleGroup fx:id="group1" />
+			</toggleGroup>
+		</RadioButton>
+		<RadioButton fx:id="btnStrength" layoutX="232.0"
+			layoutY="255.0" mnemonicParsing="false"
+			onAction="#handleSelectStrength" text="Strength"
+			toggleGroup="$group1" />
+		<DatePicker fx:id="txtExerciseDate" layoutX="149.0"
+			layoutY="312.0" promptText="M/DD/YYYY" />
+		<TextField fx:id="txtExerciseName" layoutX="149.0"
+			layoutY="337.0" prefHeight="25.0" prefWidth="174.0"
+			promptText="Exercise Name" />
+		<TextField fx:id="txtExerciseDuration" layoutX="149.0"
+			layoutY="362.0" prefHeight="25.0" prefWidth="174.0"
+			promptText="Duration (Minutes)" />
+		<TextField fx:id="txtExerciseMHRS" layoutX="149.0"
+			layoutY="387.0" prefHeight="25.0" prefWidth="174.0"
+			promptText="Max Heart Rate" />
+		<TextField fx:id="txtExerciseAHRR" layoutX="149.0"
+			layoutY="414.0" prefHeight="25.0" prefWidth="174.0"
+			promptText="Average Heart Rate" />
+		<TextField fx:id="txtExerciseDWL" layoutX="149.0"
+			layoutY="439.0" prefHeight="25.0" prefWidth="174.0"
+			promptText="Distance (Miles)" />
+		<Button fx:id="btnAddExercise" layoutX="28.0" layoutY="491.0"
+			mnemonicParsing="false" onAction="#handleAddExercise"
+			prefHeight="25.0" prefWidth="104.0" text="Add Exercise" />
+		<Button fx:id="btnDeleteExercise" layoutX="228.0"
+			layoutY="491.0" mnemonicParsing="false"
+			onAction="#handleDeleteExercise" prefHeight="25.0" prefWidth="104.0"
+			text="Delete Exercise" />
+		<TabPane fx:id="tpExercises" layoutX="357.0" layoutY="338.0"
+			prefHeight="263.0" prefWidth="609.0" tabClosingPolicy="UNAVAILABLE">
 			<tabs>
 				<Tab text="Aerobic">
 					<content>
-						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+						<AnchorPane minHeight="0.0" minWidth="0.0"
+							prefHeight="180.0" prefWidth="200.0">
 							<children>
-								<TableView fx:id="tblExerciseAerobic" layoutX="7.0" layoutY="6.0" prefHeight="223.0" prefWidth="595.0">
+								<TableView fx:id="tblExerciseAerobic" layoutX="7.0"
+									layoutY="6.0" prefHeight="223.0" prefWidth="595.0">
 									<columns>
-										<TableColumn fx:id="tcAerobicDate" prefWidth="75.0" text="Date" />
-										<TableColumn fx:id="tcAerobicName" prefWidth="101.0" text="Name" />
-										<TableColumn fx:id="tcAerobicDuration" prefWidth="104.0" text="Duration" />
-										<TableColumn fx:id="tcAerobicMaxHR" prefWidth="105.0" text="Max HR" />
-										<TableColumn fx:id="tcAerobicAvgHR" prefWidth="88.0" text="Avg HR" />
-										<TableColumn fx:id="tcAerobicDistance" prefWidth="121.0" text="Distance" />
+										<TableColumn fx:id="tcAerobicDate"
+											prefWidth="75.0" text="Date" />
+										<TableColumn fx:id="tcAerobicName"
+											prefWidth="101.0" text="Name" />
+										<TableColumn fx:id="tcAerobicDuration"
+											prefWidth="104.0" text="Duration" />
+										<TableColumn fx:id="tcAerobicMaxHR"
+											prefWidth="105.0" text="Max HR" />
+										<TableColumn fx:id="tcAerobicAvgHR"
+											prefWidth="88.0" text="Avg HR" />
+										<TableColumn fx:id="tcAerobicDistance"
+											prefWidth="121.0" text="Distance" />
 									</columns>
 								</TableView>
 							</children>
@@ -50,16 +112,24 @@
 				</Tab>
 				<Tab text="Strength">
 					<content>
-						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+						<AnchorPane minHeight="0.0" minWidth="0.0"
+							prefHeight="180.0" prefWidth="200.0">
 							<children>
-								<TableView fx:id="tblExerciseStrength" layoutX="7.0" layoutY="6.0" prefHeight="223.0" prefWidth="595.0">
+								<TableView fx:id="tblExerciseStrength" layoutX="7.0"
+									layoutY="6.0" prefHeight="223.0" prefWidth="595.0">
 									<columns>
-										<TableColumn fx:id="tcStrengthDate" prefWidth="75.0" text="Date" />
-										<TableColumn fx:id="tcStrengthName" prefWidth="101.0" text="Name" />
-										<TableColumn fx:id="tcStrengthDuration" prefWidth="104.0" text="Duration" />
-										<TableColumn fx:id="tcStrengthSets" prefWidth="105.0" text="Sets" />
-										<TableColumn fx:id="tcStrengthReps" prefWidth="88.0" text="Reps" />
-										<TableColumn fx:id="tcStrengthWeight" prefWidth="121.0" text="Weight Lifted" />
+										<TableColumn fx:id="tcStrengthDate"
+											prefWidth="75.0" text="Date" />
+										<TableColumn fx:id="tcStrengthName"
+											prefWidth="101.0" text="Name" />
+										<TableColumn fx:id="tcStrengthDuration"
+											prefWidth="104.0" text="Duration" />
+										<TableColumn fx:id="tcStrengthSets"
+											prefWidth="105.0" text="Sets" />
+										<TableColumn fx:id="tcStrengthReps"
+											prefWidth="88.0" text="Reps" />
+										<TableColumn fx:id="tcStrengthWeight"
+											prefWidth="121.0" text="Weight Lifted" />
 									</columns>
 								</TableView>
 							</children>
@@ -68,22 +138,43 @@
 				</Tab>
 			</tabs>
 		</TabPane>
-		<Label layoutX="35.0" layoutY="102.0" prefHeight="17.0" prefWidth="77.0" text="Gender:" />
-		<Label layoutX="35.0" layoutY="136.0" prefHeight="17.0" prefWidth="77.0" text="Birthdate:" />
-		<Label layoutX="28.0" layoutY="255.0" prefHeight="17.0" prefWidth="77.0" text="Exercise Type:" />
-		<RadioButton fx:id="btnAerobic" layoutX="128.0" layoutY="255.0" mnemonicParsing="false" onAction="#handleSelectAerobic" selected="true" text="Aerobic">
-			<toggleGroup>
-				<ToggleGroup fx:id="group1" />
-			</toggleGroup>
-		</RadioButton>
-		<RadioButton fx:id="btnStrength" layoutX="232.0" layoutY="255.0" mnemonicParsing="false" onAction="#handleSelectStrength" text="Strength" toggleGroup="$group1" />
-		<Button fx:id="btnAddExercise" layoutX="28.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleAddExercise" prefHeight="25.0" prefWidth="104.0" text="Add Exercise" />
-		<Button fx:id="btnDeleteExercise" layoutX="228.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleDeleteExercise" prefHeight="25.0" prefWidth="104.0" text="Delete Exercise" />
-		<TextField fx:id="txtExerciseName" layoutX="72.0" layoutY="337.0" prefHeight="25.0" prefWidth="174.0" promptText="Name" />
-		<TextField fx:id="txtExerciseDuration" layoutX="72.0" layoutY="362.0" prefHeight="25.0" prefWidth="174.0" promptText="Duration" />
-		<TextField fx:id="txtExerciseMHRS" layoutX="72.0" layoutY="387.0" prefHeight="25.0" prefWidth="174.0" promptText="Max HR" />
-		<TextField fx:id="txtExerciseAHRR" layoutX="72.0" layoutY="414.0" prefHeight="25.0" prefWidth="174.0" promptText="Avg HR" />
-		<TextField fx:id="txtExerciseDWL" layoutX="72.0" layoutY="439.0" prefHeight="25.0" prefWidth="174.0" promptText="Distance" />
-		<DatePicker fx:id="txtExerciseDate" layoutX="72.0" layoutY="312.0" promptText="M/DD/YYYY" />
+		<Label fx:id="errorMessage" layoutX="426.0" layoutY="180.0"
+			opacity="0.0" prefHeight="105.0" prefWidth="466.0" text="Placeholder">
+			<font>
+				<Font name="System Bold" size="21.0" />
+			</font>
+		</Label>
+		<Label layoutX="357.0" layoutY="312.0" prefHeight="17.0"
+			prefWidth="51.0" text="Search:" />
+		<TextField fx:id="txtSearch" editable="false"
+			layoutX="403.0" layoutY="308.0" promptText="Work In Progress" />
+		<Label layoutX="35.0" layoutY="102.0" prefHeight="17.0"
+			prefWidth="77.0" text="Gender:" />
+		<Label layoutX="35.0" layoutY="136.0" prefHeight="17.0"
+			prefWidth="77.0" text="Birthdate:" />
+		<Label layoutX="28.0" layoutY="255.0" prefHeight="17.0"
+			prefWidth="77.0" text="Exercise Type:" />
+		<Label alignment="CENTER" layoutX="28.0" layoutY="27.0"
+			prefHeight="17.0" prefWidth="77.0" text="Student ID" />
+		<Label alignment="CENTER" layoutX="132.0" layoutY="27.0"
+			prefHeight="17.0" prefWidth="77.0" text="First Name" />
+		<Label alignment="CENTER" layoutX="236.0" layoutY="27.0"
+			prefHeight="17.0" prefWidth="77.0" text="Last Name" />
+		<Label alignment="CENTER" layoutX="340.0" layoutY="27.0"
+			prefHeight="17.0" prefWidth="77.0" text="Height (in)" />
+		<Label alignment="CENTER" layoutX="439.0" layoutY="27.0"
+			prefHeight="17.0" prefWidth="77.0" text="Weight (lbs)" />
+		<Label layoutX="29.0" layoutY="315.0" prefHeight="17.0"
+			prefWidth="77.0" text="Exercise Date:" />
+		<Label layoutX="29.0" layoutY="340.0" prefHeight="17.0"
+			prefWidth="83.0" text="Exercise Name:" />
+		<Label layoutX="29.0" layoutY="365.0" prefHeight="17.0"
+			prefWidth="104.0" text="Duration (Minutes):" />
+		<Label fx:id="lbMHRS" layoutX="29.0" layoutY="390.0"
+			prefHeight="17.0" prefWidth="89.0" text="Max Heart Rate:" />
+		<Label fx:id="lbAHRR" layoutX="29.0" layoutY="417.0"
+			prefHeight="17.0" prefWidth="114.0" text="Average Heart Rate:" />
+		<Label fx:id="lbDWL" layoutX="29.0" layoutY="442.0"
+			prefHeight="17.0" prefWidth="95.0" text="Distance (Miles):" />
 	</children>
 </AnchorPane>
