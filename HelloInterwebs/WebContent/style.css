@@ -1,4 +1,7 @@
 @charset "ISO-8859-1";
 body {
   background-color: navajowhite;
+  font-family: Arial, Helvetica, sans-serif;
+  text-shadow: 1px 1px 1px #cccc;
+  text-align: center;
 }
